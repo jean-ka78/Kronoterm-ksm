@@ -3,10 +3,10 @@
   "name": "Kronoterm KSM (Modbus)",
   "codeowners": ["@jean-ka78"],
   "config_flow": true,
-  "documentation": "https://github.com/jean-ka78/kronoterm-ksm",
+  "documentation": "https://github.com/jean-ka78/Kronoterm-ksm",
   "integration_type": "device",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/jean-ka78/kronoterm-ksm/issues",
+  "issue_tracker": "https://github.com/jean-ka78/Kronoterm-ksm/issues",
   "requirements": [],
   "version": "0.1.0"
 }
