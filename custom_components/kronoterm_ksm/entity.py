@@ -9,6 +9,7 @@ from .const import DOMAIN, MANUFACTURER, MODEL
 from .coordinator import KronotermCoordinator
 
 CATEGORIES = {"config": EntityCategory.CONFIG, "diagnostic": EntityCategory.DIAGNOSTIC}
+PLATFORM_DOMAINS = {"sensor", "binary_sensor", "switch", "select", "number", "button", "climate"}
 
 
 class KronotermEntity(CoordinatorEntity[KronotermCoordinator]):
@@ -22,6 +23,11 @@ class KronotermEntity(CoordinatorEntity[KronotermCoordinator]):
         self._desc = desc or {}
         self._attr_translation_key = key
         self._attr_unique_id = f"{entry.unique_id or entry.entry_id}_{key}"
+        # Fixed, language-independent entity_id (otherwise HA builds it from the name
+        # translated into the system language). Domain = platform module (sensor.py -> sensor).
+        domain = type(self).__module__.rsplit(".", 1)[-1]
+        if domain in PLATFORM_DOMAINS:
+            self.entity_id = f"{domain}.kronoterm_{key}"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.unique_id or entry.entry_id)},
             manufacturer=MANUFACTURER,

@@ -80,8 +80,11 @@ def test_full_integration():
                 ent.hass = hass
                 await ent.async_added_to_hass()
                 entities[(name, ent._attr_translation_key)] = ent
-        # unique ids and translation keys
+        # unique ids, fixed language-independent entity_ids, translation keys
         assert len({e._attr_unique_id for e in entities.values()}) == len(entities)
+        assert len({e.entity_id for e in entities.values()}) == len(entities)
+        for (platform, key), ent in entities.items():
+            assert ent.entity_id == f"{platform}.kronoterm_{key}"
         assert all(e._attr_translation_key for e in entities.values())
 
         get = lambda p, k: entities[(p, k)]  # noqa: E731

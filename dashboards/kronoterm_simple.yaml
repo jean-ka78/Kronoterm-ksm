@@ -1,0 +1,299 @@
+# Дашборд Kronoterm: кожна категорія - окрема картка.
+# Встановлення: Налаштування -> Дашборди -> Додати дашборд (з нуля) ->
+# відкрити -> олівець (редагувати) -> три крапки -> Редактор сирої конфігурації ->
+# вставити весь цей текст -> Зберегти.
+#
+# ID сутностей - інтеграції kronoterm_ksm (sensor.kronoterm_<ключ>), однакові за будь-якої мови HA.
+
+title: Kronoterm
+views:
+  - title: Kronoterm
+    path: kronoterm
+    icon: mdi:heat-pump
+    type: masonry
+    cards:
+
+      # ---------------------------------------------------------- Загальне
+      - type: entities
+        title: Загальне
+        icon: mdi:heat-pump-outline
+        state_color: true
+        entities:
+          - entity: sensor.kronoterm_outdoor_temperature
+            name: Зовнішня температура
+          - entity: binary_sensor.kronoterm_system_running
+            name: Система працює
+          - entity: switch.kronoterm_heat_pump_enabled
+            name: Тепловий насос увімкнено
+          - entity: select.kronoterm_mode
+            name: Режим
+          - entity: select.kronoterm_program
+            name: Програма
+          - entity: sensor.kronoterm_current_function
+            name: Поточна функція
+          - entity: sensor.kronoterm_season
+            name: Сезонний режим
+          - entity: sensor.kronoterm_operation_program
+            name: Програма (стан)
+          - type: divider
+          - entity: binary_sensor.kronoterm_frost_protection
+            name: Захист від замерзання
+          - entity: binary_sensor.kronoterm_silent_mode
+            name: Тихий режим
+          - entity: binary_sensor.kronoterm_boost_mode
+            name: Boost
+          - entity: binary_sensor.kronoterm_pv_signal
+            name: Сигнал PV
+          - entity: binary_sensor.kronoterm_remote_activation
+            name: Дистанційне ввімкнення
+          - type: divider
+          - entity: switch.kronoterm_vacation
+            name: Відпустка
+          - entity: number.kronoterm_vacation_days
+            name: Відпустка, днів
+          - entity: number.kronoterm_eco_offset
+            name: Зміщення ECO
+          - entity: number.kronoterm_comfort_offset
+            name: Зміщення COMFORT
+          - entity: number.kronoterm_system_correction
+            name: Корекція температури системи
+
+      # ---------------------------------------------------------- Аварії
+      - type: entities
+        title: Аварії
+        icon: mdi:alert
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_problem
+            name: Проблема
+          - entity: sensor.kronoterm_error_status
+            name: Стан помилок
+          - entity: sensor.kronoterm_active_alarms
+            name: Активні аварії
+          - entity: sensor.kronoterm_active_warnings
+            name: Активні попередження
+          - entity: binary_sensor.kronoterm_error_shown
+            name: Помилка на дисплеї
+          - entity: button.kronoterm_acknowledge_error
+            name: Скинути помилку
+
+      # ---------------------------------------------------------- Агрегат
+      - type: entities
+        title: Агрегат (компресор)
+        icon: mdi:engine
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_compressor
+            name: Компресор
+          - entity: binary_sensor.kronoterm_compressor_starting
+            name: Запуск компресора
+          - entity: binary_sensor.kronoterm_compressor_protection
+            name: Захист компресора
+          - entity: binary_sensor.kronoterm_defrost
+            name: Відтавання
+          - type: divider
+          - entity: sensor.kronoterm_flow_temperature
+            name: Подача
+          - entity: sensor.kronoterm_return_temperature
+            name: Зворотка (вхід ТН)
+          - entity: sensor.kronoterm_evaporating_temperature
+            name: Випаровування
+          - entity: sensor.kronoterm_compressor_temperature
+            name: Температура компресора
+          - type: divider
+          - entity: sensor.kronoterm_load
+            name: Навантаження
+          - entity: sensor.kronoterm_electrical_power
+            name: Електрична потужність
+          - entity: sensor.kronoterm_heating_power
+            name: Теплова потужність
+          - entity: sensor.kronoterm_cop
+            name: COP
+
+      # ---------------------------------------------------------- Головний насос
+      - type: entities
+        title: Головний насос
+        icon: mdi:pump
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_main_pump
+            name: Працює
+          - entity: number.kronoterm_main_pump_power
+            name: Потужність (з таблички)
+
+      # ---------------------------------------------------------- Система опалення
+      - type: entities
+        title: Система опалення
+        icon: mdi:gauge
+        entities:
+          - entity: sensor.kronoterm_system_pressure
+            name: Тиск
+          - entity: sensor.kronoterm_system_pressure_setting
+            name: Межа тиску
+
+      # ---------------------------------------------------------- Буферний бак
+      - type: entities
+        title: Буферний бак
+        icon: mdi:storage-tank
+        state_color: true
+        entities:
+          - entity: select.kronoterm_buffer_mode
+            name: Режим
+          - entity: sensor.kronoterm_buffer_schedule
+            name: За розкладом
+          - entity: binary_sensor.kronoterm_main_pump
+            name: Насос (головний)
+          - type: divider
+          - entity: sensor.kronoterm_buffer_temperature
+            name: Температура
+          - entity: sensor.kronoterm_buffer_target
+            name: Уставка
+          - entity: sensor.kronoterm_buffer_calculated
+            name: Розрахункова
+          - type: divider
+          - entity: number.kronoterm_buffer_curve_low
+            name: Крива при -15 °C
+          - entity: number.kronoterm_buffer_curve_high
+            name: Крива при +15 °C
+
+      # ---------------------------------------------------------- Гаряча вода
+      - type: entities
+        title: Гаряча вода
+        icon: mdi:water-boiler
+        state_color: true
+        entities:
+          - entity: sensor.kronoterm_dhw_temperature
+            name: Температура
+          - entity: sensor.kronoterm_dhw_current_target
+            name: Поточна уставка
+          - entity: number.kronoterm_dhw_target
+            name: Бажана температура
+          - entity: select.kronoterm_dhw_mode
+            name: Режим
+          - entity: sensor.kronoterm_dhw_schedule
+            name: За розкладом
+          - type: divider
+          - entity: switch.kronoterm_dhw_quick_heating
+            name: Швидкий нагрів
+          - entity: binary_sensor.kronoterm_dhw_quick_heating_active
+            name: Швидкий нагрів активний
+          - entity: binary_sensor.kronoterm_dhw_pump
+            name: Насос ГВП
+          - entity: binary_sensor.kronoterm_circulation_pump
+            name: Циркуляційний насос
+          - entity: switch.kronoterm_dhw_circulation
+            name: Циркуляція (керування)
+          - type: divider
+          - entity: number.kronoterm_dhw_eco_offset
+            name: Зміщення ECO
+          - entity: number.kronoterm_dhw_comfort_offset
+            name: Зміщення COMFORT
+          - entity: switch.kronoterm_anti_legionella
+            name: Антилегіонела
+          - entity: number.kronoterm_anti_legionella_temperature
+            name: Антилегіонела, температура
+          - entity: number.kronoterm_anti_legionella_period
+            name: Антилегіонела, період
+          - entity: number.kronoterm_anti_legionella_start
+            name: Антилегіонела, початок (хв)
+          - type: divider
+          - entity: number.kronoterm_dhw_pump_power
+            name: Потужність насоса ГВП
+          - entity: number.kronoterm_circulation_pump_power
+            name: Потужність циркуляційного
+
+      # ---------------------------------------------------------- Контур 1
+      - type: entities
+        title: Контур 1
+        icon: mdi:radiator
+        state_color: true
+        entities:
+          - entity: sensor.kronoterm_loop_1_temperature
+            name: Температура
+          - entity: sensor.kronoterm_loop_1_calculated
+            name: Розрахункова подача
+          - entity: sensor.kronoterm_loop_1_room_temperature
+            name: Кімнатна температура
+          - entity: sensor.kronoterm_loop_1_room_target
+            name: Поточна кімнатна уставка
+          - entity: number.kronoterm_loop_1_target
+            name: Бажана температура
+          - entity: select.kronoterm_loop_1_mode
+            name: Режим
+          - entity: sensor.kronoterm_loop_1_schedule
+            name: За розкладом
+          - type: divider
+          - entity: binary_sensor.kronoterm_loop_1_pump
+            name: Насос
+          - entity: binary_sensor.kronoterm_loop_1_demand
+            name: Запит термостата
+          - entity: number.kronoterm_loop_1_pump_power
+            name: Потужність насоса
+          - type: divider
+          - entity: number.kronoterm_loop_1_eco_offset
+            name: Зміщення ECO
+          - entity: number.kronoterm_loop_1_comfort_offset
+            name: Зміщення COMFORT
+          - entity: switch.kronoterm_loop_1_adaptive_curve
+            name: Адаптивна крива
+          - entity: number.kronoterm_loop_1_curve_low
+            name: Крива, низька точка
+          - entity: number.kronoterm_loop_1_curve_high
+            name: Крива, висока точка
+
+      # ---------------------------------------------------------- Додаткові джерела
+      - type: entities
+        title: Додаткові джерела
+        icon: mdi:fire
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_additional_source
+            name: Додаткове джерело працює
+          - entity: switch.kronoterm_allow_additional_source
+            name: Дозволити додаткове
+          - entity: binary_sensor.kronoterm_reserve_source
+            name: Резервне джерело працює
+          - entity: switch.kronoterm_allow_reserve_source
+            name: Дозволити резервне
+
+      # ---------------------------------------------------------- Статистика
+      - type: entities
+        title: Статистика
+        icon: mdi:chart-bar
+        entities:
+          - entity: sensor.kronoterm_scop
+            name: SCOP
+          - type: section
+            label: Енергія (лічильники насоса)
+          - entity: sensor.kronoterm_electrical_energy
+            name: Електрична енергія
+          - entity: sensor.kronoterm_thermal_energy
+            name: Теплова енергія
+          - type: section
+            label: Енергія за призначенням
+          - entity: sensor.kronoterm_energy_heating
+            name: Опалення
+          - entity: sensor.kronoterm_energy_dhw
+            name: Гаряча вода
+          - entity: sensor.kronoterm_energy_other
+            name: Інше
+          - entity: sensor.kronoterm_energy_total_calculated
+            name: Разом (розрахунок)
+          - entity: sensor.kronoterm_energy_pumps
+            name: Насоси (оцінка)
+          - entity: sensor.kronoterm_pumps_power
+            name: Потужність насосів (оцінка)
+          - type: section
+            label: Мотогодини
+          - entity: sensor.kronoterm_hours_compressor_heating
+            name: Компресор, опалення
+          - entity: sensor.kronoterm_hours_compressor_dhw
+            name: Компресор, гаряча вода
+          - entity: sensor.kronoterm_hours_compressor_cooling
+            name: Компресор, охолодження
+          - entity: sensor.kronoterm_hours_main_pump
+            name: Головний насос
+          - entity: sensor.kronoterm_hours_dhw_pump
+            name: Насос ГВП
+          - entity: sensor.kronoterm_hours_backup_heater_1
+            name: Додатковий нагрівач 1

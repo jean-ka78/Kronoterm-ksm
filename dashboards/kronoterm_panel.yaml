@@ -1,0 +1,795 @@
+# Панель Kronoterm у стилі застосунку Kronoterm.
+# Потрібно: HACS -> Frontend -> button-card (встановити, оновити сторінку браузера).
+# Встановлення: Панель -> олівець -> ⋮ -> Редактор сирої конфігурації ->
+# видалити все -> вставити цей текст -> Зберегти.
+
+title: Kronoterm
+
+# ================================================================ ШАБЛОНИ
+button_card_templates:
+
+  # ---------------------------------------------- Плитка (Бак / Контур / Вода)
+  kt_tile:
+    show_name: false
+    show_icon: false
+    show_state: false
+    extra_styles: |
+      @keyframes kt-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    styles:
+      card:
+        - padding: 0
+        - border-radius: 10px
+        - border: 1px solid #3a3a3a
+        - background: "linear-gradient(180deg, #2a2a2a 0%, #151515 100%)"
+        - color: "#ffffff"
+        - overflow: hidden
+        - min-width: 0
+      grid:
+        - grid-template-areas: '"title" "status" "temp" "target"'
+        - grid-template-columns: 1fr
+        - grid-template-rows: auto auto 1fr auto
+      custom_fields:
+        title:
+          - padding: 10px 6px
+          - font-size: "[[[ return window.innerWidth < 700 ? '13px' : '15px' ]]]"
+          - white-space: nowrap
+          - overflow: hidden
+          - text-overflow: ellipsis
+          - font-weight: 600
+          - text-align: center
+          - background: "#1b1b1b"
+          - border-bottom: 1px solid #333
+        status:
+          - padding: "[[[ return window.innerWidth < 700 ? '8px 6px' : '10px 12px' ]]]"
+          - min-width: 0
+          - border-bottom: 1px solid #333
+        temp:
+          - padding: 14px 14px 0 14px
+          - justify-self: center
+          - font-size: "clamp(34px, 5vw, 54px)"
+          - font-weight: 300
+          - line-height: 1.1
+        target:
+          - padding: 4px 14px 16px 14px
+          - justify-self: center
+          - font-size: "clamp(32px, 5vw, 52px)"
+          - font-weight: 300
+          - line-height: 1.1
+          - color: "#29a9ff"
+    custom_fields:
+      title: "[[[ return (window.innerWidth < 700 && variables.short) ? variables.short : variables.title ]]]"
+      status: |
+        [[[
+          const bad = (s) => !s || s === 'unavailable' || s === 'unknown';
+          const m = states[variables.mode] ? states[variables.mode].state : null;
+          const on = !bad(m) && m !== 'off';
+          const s = variables.sched && states[variables.sched] ? states[variables.sched].state : null;
+          const letter = {'normal': 'N', 'eco': 'E', 'comfort': 'C'}[s] || '–';
+          const n = window.innerWidth < 700;
+          const big = n ? 28 : 48, fan = n ? 20 : 28, fs = n ? '13px' : '16px';
+          let h = `<div style="display:flex;align-items:center;justify-content:space-between;gap:${n ? 3 : 8}px;font-size:${fs}">
+            <ha-icon icon="${variables.img}" style="--mdc-icon-size:${big}px;color:#9ec9ff;flex-shrink:0"></ha-icon>
+            <span style="font-weight:600;color:${on ? '#fff' : '#777'}">${bad(m) ? '–' : (m === 'schedule' ? 'AUTO' : (on ? 'ON' : 'OFF'))}</span>
+            <span style="border:2px solid #29a9ff;color:#29a9ff;border-radius:4px;padding:0 ${n ? 3 : 6}px;font-weight:700">${letter}</span>`;
+          if (variables.pump) {
+            const p = states[variables.pump] && states[variables.pump].state === 'on';
+            h += `<ha-icon icon="mdi:fan" title="Насос"
+                    style="--mdc-icon-size:${fan}px;flex-shrink:0;color:${p ? '#29a9ff' : '#555'};${p ? 'animation:kt-spin 2s linear infinite' : ''}"></ha-icon>`;
+          } else {
+            h += `<span style="width:${fan}px"></span>`;
+          }
+          return h + `</div>`;
+        ]]]
+      temp: |
+        [[[
+          const v = parseFloat(states[variables.temp] ? states[variables.temp].state : NaN);
+          if (isNaN(v)) return '–';
+          return `${v.toFixed(1)}<span style="font-size:0.4em;vertical-align:top;margin-left:4px">°C</span>`;
+        ]]]
+      target: |
+        [[[
+          const v = parseFloat(states[variables.target] ? states[variables.target].state : NaN);
+          const txt = isNaN(v) ? '–' : v.toFixed(1);
+          return `<span style="display:inline-flex;align-items:center;gap:6px">
+            <ha-icon icon="mdi:calculator" style="--mdc-icon-size:${window.innerWidth < 700 ? 18 : 26}px;color:#29a9ff"></ha-icon>
+            ${txt}<span style="font-size:0.4em;align-self:flex-start;margin-left:2px">°C</span></span>`;
+        ]]]
+
+  # ---------------------------------------------- Маленьке значення (Вихід ТН, тиск...)
+  kt_val:
+    show_name: false
+    show_icon: false
+    show_state: false
+    tap_action:
+      action: more-info
+    styles:
+      card:
+        - padding: 4px 6px
+        - background: none
+        - border: none
+        - box-shadow: none
+        - color: "#ffffff"
+      grid:
+        - grid-template-areas: '"i l" "i v"'
+        - grid-template-columns: "[[[ return window.innerWidth < 700 ? '24px 1fr' : '34px 1fr' ]]]"
+        - grid-template-rows: auto auto
+      custom_fields:
+        i:
+          - align-self: center
+        l:
+          - justify-self: start
+          - font-size: "[[[ return window.innerWidth < 700 ? '10px' : '11px' ]]]"
+          - color: "#bbbbbb"
+          - white-space: nowrap
+          - overflow: hidden
+          - text-overflow: ellipsis
+          - max-width: 100%
+        v:
+          - justify-self: start
+          - font-size: "[[[ return window.innerWidth < 700 ? '13px' : '15px' ]]]"
+          - white-space: nowrap
+    custom_fields:
+      i: '[[[ return `<ha-icon icon="${variables.icon}" style="--mdc-icon-size:${window.innerWidth < 700 ? 20 : 28}px;color:${variables.color}"></ha-icon>` ]]]'
+      l: "[[[ return (window.innerWidth < 700 && variables.short) ? variables.short : variables.label ]]]"
+      v: |
+        [[[
+          const x = parseFloat(entity ? entity.state : NaN);
+          return isNaN(x) ? '–' : `${x.toFixed(variables.dec)} ${variables.unit}`;
+        ]]]
+
+  # ---------------------------------------------- Значок стану (компресор, аварія...)
+  kt_flag:
+    show_name: false
+    show_state: false
+    show_icon: true
+    tap_action:
+      action: more-info
+    extra_styles: |
+      @keyframes kt-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes kt-blink { 50% { opacity: 0.3; } }
+    styles:
+      card:
+        - padding: 4px
+        - background: none
+        - border: none
+        - box-shadow: none
+        - width: "[[[ return window.innerWidth < 700 ? '26px' : '36px' ]]]"
+      icon:
+        - width: "[[[ return window.innerWidth < 700 ? '20px' : '26px' ]]]"
+        - color: "#444444"
+    state:
+      - value: "on"
+        styles:
+          icon:
+            - color: "[[[ return variables.color ]]]"
+            - animation: "[[[ return variables.anim || 'none' ]]]"
+
+  # ---------------------------------------------- Функція (іконка + текст)
+  kt_fn:
+    show_state: false
+    layout: icon_name
+    tap_action:
+      action: more-info
+    icon: |
+      [[[
+        return {
+          'heating': 'mdi:heat-wave', 'dhw': 'mdi:water-thermometer',
+          'cooling': 'mdi:snowflake', 'pool': 'mdi:pool',
+          'disinfection': 'mdi:bacteria-outline', 'standby': 'mdi:pause-circle-outline',
+          'remote_off': 'mdi:power',
+        }[entity ? entity.state : ''] || 'mdi:heat-pump-outline';
+      ]]]
+    # Текст = стан "Поточна функція", перекладений мовою HA (Опалення / Heating / Ogrevanje)
+    name: |
+      [[[
+        if (!entity) return '–';
+        return (hass.formatEntityState ? hass.formatEntityState(entity) : entity.state);
+      ]]]
+    styles:
+      card:
+        - padding: "[[[ return window.innerWidth < 700 ? '8px 8px' : '10px 14px' ]]]"
+        - background: none
+        - border: none
+        - box-shadow: none
+        - color: "#ffffff"
+      grid:
+        - grid-template-columns: "[[[ return window.innerWidth < 700 ? '44px 1fr' : '70px 1fr' ]]]"
+      icon:
+        - width: "[[[ return window.innerWidth < 700 ? '34px' : '50px' ]]]"
+        - color: |
+            [[[
+              return {
+                'heating': '#ff3b30', 'dhw': '#ff9500', 'cooling': '#29a9ff',
+                'pool': '#29a9ff', 'disinfection': '#ff9500',
+              }[entity ? entity.state : ''] || '#888888';
+            ]]]
+      name:
+        - justify-self: start
+        - font-size: "[[[ return window.innerWidth < 700 ? '15px' : '18px' ]]]"
+        - font-weight: 500
+        - white-space: normal
+        - text-align: left
+
+  # ---------------------------------------------- Верхній рядок (функція)
+  kt_header:
+    show_name: false
+    show_icon: false
+    show_state: false
+    tap_action:
+      action: none
+    styles:
+      card:
+        - padding: 0
+        - border-radius: 10px
+        - border: 1px solid #3a3a3a
+        - background: "linear-gradient(180deg, #2a2a2a 0%, #151515 100%)"
+        - color: "#ffffff"
+      grid:
+        - grid-template-areas: '"fn flags" "vals vals"'
+        - grid-template-columns: 1fr auto
+        - grid-template-rows: auto auto
+      custom_fields:
+        fn:
+          - justify-self: stretch
+        flags:
+          - padding-right: 8px
+        vals:
+          - justify-self: stretch
+          - border-top: 1px solid #333
+          - padding: 4px 8px
+    custom_fields:
+      # Іконка і текст функції: відкриває "Current function"
+      fn:
+        card:
+          type: custom:button-card
+          template: kt_fn
+          entity: sensor.kronoterm_current_function
+      # Значки праворуч: кожен відкриває свою сутність
+      flags:
+        card:
+          type: horizontal-stack
+          cards:
+            - type: custom:button-card
+              template: kt_flag
+              entity: switch.kronoterm_heat_pump_enabled
+              icon: mdi:power
+              variables: { color: "#29a9ff" }
+            - type: custom:button-card
+              template: kt_flag
+              entity: binary_sensor.kronoterm_compressor
+              icon: mdi:fan
+              variables: { color: "#ff3b30", anim: "kt-spin 2s linear infinite" }
+            - type: custom:button-card
+              template: kt_flag
+              entity: binary_sensor.kronoterm_defrost
+              icon: mdi:snowflake-melt
+              variables: { color: "#29a9ff" }
+            - type: custom:button-card
+              template: kt_flag
+              entity: binary_sensor.kronoterm_additional_source
+              icon: mdi:fire
+              variables: { color: "#ff9500" }
+            - type: custom:button-card
+              template: kt_flag
+              entity: binary_sensor.kronoterm_problem
+              icon: mdi:alert
+              variables: { color: "#ff3b30", anim: "kt-blink 1s infinite" }
+      # Значення: кожне відкриває свою сутність
+      vals:
+        card:
+          type: vertical-stack
+          cards:
+            # Комп'ютер / планшет: усе в один ряд
+            - type: conditional
+              conditions:
+                - condition: screen
+                  media_query: "(min-width: 700px)"
+              card:
+                type: grid
+                columns: 8
+                square: false
+                cards:
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_flow_temperature
+                    variables: { icon: "mdi:thermometer-chevron-up", color: "#ff3b30", label: "Вихід ТН", dec: 1, unit: "°C" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_return_temperature
+                    variables: { icon: "mdi:thermometer-chevron-down", color: "#29a9ff", label: "Вхід ТН", dec: 1, unit: "°C" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_system_pressure
+                    variables: { icon: "mdi:gauge", color: "#bbbbbb", label: "Тиск в системі", short: "Тиск", dec: 1, unit: "bar" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_outdoor_temperature
+                    variables: { icon: "mdi:sun-thermometer-outline", color: "#bbbbbb", label: "Зовні", dec: 1, unit: "°C" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_electrical_power
+                    variables: { icon: "mdi:flash", color: "#ffcc00", label: "Споживання", short: "Спожив.", dec: 0, unit: "W" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_heating_power
+                    variables: { icon: "mdi:fire", color: "#ff6b30", label: "Теплова потужність", short: "Тепло", dec: 0, unit: "W" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_cop
+                    variables: { icon: "mdi:speedometer", color: "#4cd964", label: "COP", dec: 2, unit: "" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_scop
+                    variables: { icon: "mdi:speedometer-medium", color: "#4cd964", label: "Середній COP", short: "SCOP", dec: 2, unit: "" }
+            # Телефон: два ряди по чотири
+            - type: conditional
+              conditions:
+                - condition: screen
+                  media_query: "(max-width: 699px)"
+              card:
+                type: grid
+                columns: 4
+                square: false
+                cards:
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_flow_temperature
+                    variables: { icon: "mdi:thermometer-chevron-up", color: "#ff3b30", label: "Вихід ТН", dec: 1, unit: "°C" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_return_temperature
+                    variables: { icon: "mdi:thermometer-chevron-down", color: "#29a9ff", label: "Вхід ТН", dec: 1, unit: "°C" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_system_pressure
+                    variables: { icon: "mdi:gauge", color: "#bbbbbb", label: "Тиск в системі", short: "Тиск", dec: 1, unit: "bar" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_outdoor_temperature
+                    variables: { icon: "mdi:sun-thermometer-outline", color: "#bbbbbb", label: "Зовні", dec: 1, unit: "°C" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_electrical_power
+                    variables: { icon: "mdi:flash", color: "#ffcc00", label: "Споживання", short: "Спожив.", dec: 0, unit: "W" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_heating_power
+                    variables: { icon: "mdi:fire", color: "#ff6b30", label: "Теплова потужність", short: "Тепло", dec: 0, unit: "W" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_cop
+                    variables: { icon: "mdi:speedometer", color: "#4cd964", label: "COP", dec: 2, unit: "" }
+                  - type: custom:button-card
+                    template: kt_val
+                    entity: sensor.kronoterm_scop
+                    variables: { icon: "mdi:speedometer-medium", color: "#4cd964", label: "Середній COP", short: "SCOP", dec: 2, unit: "" }
+
+# ================================================================ ВКЛАДКИ
+views:
+
+  # ---------------------------------------------------------- Огляд системи
+  - title: Перегляд системи
+    path: overview
+    icon: mdi:magnify
+    type: panel
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:button-card
+            template: kt_header
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              - type: custom:button-card
+                template: kt_tile
+                variables:
+                  title: Бак
+                  img: mdi:waves
+                  temp: sensor.kronoterm_buffer_temperature
+                  target: sensor.kronoterm_buffer_calculated
+                  mode: select.kronoterm_buffer_mode
+                  sched: sensor.kronoterm_buffer_schedule
+                  pump: binary_sensor.kronoterm_main_pump
+                tap_action:
+                  action: navigate
+                  navigation_path: buffer
+              - type: custom:button-card
+                template: kt_tile
+                variables:
+                  title: Контур опалювання 1
+                  short: Контур 1
+                  img: mdi:radiator
+                  temp: sensor.kronoterm_loop_1_temperature
+                  target: sensor.kronoterm_loop_1_calculated
+                  mode: select.kronoterm_loop_1_mode
+                  sched: sensor.kronoterm_loop_1_schedule
+                  pump: binary_sensor.kronoterm_loop_1_pump
+                tap_action:
+                  action: navigate
+                  navigation_path: loop1
+              - type: custom:button-card
+                template: kt_tile
+                variables:
+                  title: Побутова вода
+                  img: mdi:water-pump
+                  temp: sensor.kronoterm_dhw_temperature
+                  target: sensor.kronoterm_dhw_current_target
+                  mode: select.kronoterm_dhw_mode
+                  sched: sensor.kronoterm_dhw_schedule
+                  pump: binary_sensor.kronoterm_dhw_pump
+                tap_action:
+                  action: navigate
+                  navigation_path: dhw
+
+  # ---------------------------------------------------------- Бак
+  - title: Бак
+    path: buffer
+    icon: mdi:storage-tank
+    type: masonry
+    cards:
+      - type: custom:button-card
+        template: kt_tile
+        variables:
+          title: Бак
+          img: mdi:waves
+          temp: sensor.kronoterm_buffer_temperature
+          target: sensor.kronoterm_buffer_calculated
+          mode: select.kronoterm_buffer_mode
+          sched: sensor.kronoterm_buffer_schedule
+          pump: binary_sensor.kronoterm_main_pump
+        tap_action:
+          action: navigate
+          navigation_path: overview
+      - type: thermostat
+        entity: climate.kronoterm_buffer
+        features:
+          - type: climate-hvac-modes
+            hvac_modes: ["off", "heat", "auto"]
+
+      - type: entities
+        title: Буферний бак
+        icon: mdi:storage-tank
+        state_color: true
+        entities:
+          - entity: select.kronoterm_buffer_mode
+            name: Режим
+          - entity: sensor.kronoterm_buffer_schedule
+            name: За розкладом
+          - entity: binary_sensor.kronoterm_main_pump
+            name: Насос (головний)
+          - type: divider
+          - entity: sensor.kronoterm_buffer_temperature
+            name: Температура
+          - entity: sensor.kronoterm_buffer_target
+            name: Уставка
+          - entity: sensor.kronoterm_buffer_calculated
+            name: Розрахункова
+          - type: divider
+          - entity: number.kronoterm_buffer_curve_low
+            name: Крива при -15 °C
+          - entity: number.kronoterm_buffer_curve_high
+            name: Крива при +15 °C
+
+      - type: entities
+        title: Головний насос
+        icon: mdi:pump
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_main_pump
+            name: Працює
+          - entity: number.kronoterm_main_pump_power
+            name: Потужність (з таблички)
+
+      - type: entities
+        title: Система опалення
+        icon: mdi:gauge
+        entities:
+          - entity: sensor.kronoterm_system_pressure
+            name: Тиск
+          - entity: sensor.kronoterm_system_pressure_setting
+            name: Межа тиску
+
+  # ---------------------------------------------------------- Контур 1
+  - title: Контур опалювання 1
+    path: loop1
+    icon: mdi:radiator
+    type: masonry
+    cards:
+      - type: custom:button-card
+        template: kt_tile
+        variables:
+          title: Контур опалювання 1
+          short: Контур 1
+          img: mdi:radiator
+          temp: sensor.kronoterm_loop_1_temperature
+          target: sensor.kronoterm_loop_1_calculated
+          mode: select.kronoterm_loop_1_mode
+          sched: sensor.kronoterm_loop_1_schedule
+          pump: binary_sensor.kronoterm_loop_1_pump
+        tap_action:
+          action: navigate
+          navigation_path: overview
+      - type: thermostat
+        entity: climate.kronoterm_loop_1
+        features:
+          - type: climate-hvac-modes
+            hvac_modes: ["off", "heat", "auto"]
+
+      - type: entities
+        title: Контур 1
+        icon: mdi:radiator
+        state_color: true
+        entities:
+          - entity: sensor.kronoterm_loop_1_temperature
+            name: Температура
+          - entity: sensor.kronoterm_loop_1_calculated
+            name: Розрахункова подача
+          - entity: sensor.kronoterm_loop_1_room_temperature
+            name: Кімнатна температура
+          - entity: sensor.kronoterm_loop_1_room_target
+            name: Поточна кімнатна уставка
+          - entity: number.kronoterm_loop_1_target
+            name: Бажана температура
+          - entity: select.kronoterm_loop_1_mode
+            name: Режим
+          - entity: sensor.kronoterm_loop_1_schedule
+            name: За розкладом
+          - type: divider
+          - entity: binary_sensor.kronoterm_loop_1_pump
+            name: Насос
+          - entity: binary_sensor.kronoterm_loop_1_demand
+            name: Запит термостата
+          - entity: number.kronoterm_loop_1_pump_power
+            name: Потужність насоса
+          - type: divider
+          - entity: number.kronoterm_loop_1_eco_offset
+            name: Зміщення ECO
+          - entity: number.kronoterm_loop_1_comfort_offset
+            name: Зміщення COMFORT
+          - entity: switch.kronoterm_loop_1_adaptive_curve
+            name: Адаптивна крива
+          - entity: number.kronoterm_loop_1_curve_low
+            name: Крива, низька точка
+          - entity: number.kronoterm_loop_1_curve_high
+            name: Крива, висока точка
+
+  # ---------------------------------------------------------- Побутова вода
+  - title: Побутова вода
+    path: dhw
+    icon: mdi:water-pump
+    type: masonry
+    cards:
+      - type: custom:button-card
+        template: kt_tile
+        variables:
+          title: Побутова вода
+          img: mdi:water-pump
+          temp: sensor.kronoterm_dhw_temperature
+          target: sensor.kronoterm_dhw_current_target
+          mode: select.kronoterm_dhw_mode
+          sched: sensor.kronoterm_dhw_schedule
+          pump: binary_sensor.kronoterm_dhw_pump
+        tap_action:
+          action: navigate
+          navigation_path: overview
+      - type: thermostat
+        entity: climate.kronoterm_dhw
+        features:
+          - type: climate-hvac-modes
+            hvac_modes: ["off", "heat", "auto"]
+
+      - type: entities
+        title: Гаряча вода
+        icon: mdi:water-boiler
+        state_color: true
+        entities:
+          - entity: sensor.kronoterm_dhw_temperature
+            name: Температура
+          - entity: sensor.kronoterm_dhw_current_target
+            name: Поточна уставка
+          - entity: number.kronoterm_dhw_target
+            name: Бажана температура
+          - entity: select.kronoterm_dhw_mode
+            name: Режим
+          - entity: sensor.kronoterm_dhw_schedule
+            name: За розкладом
+          - type: divider
+          - entity: switch.kronoterm_dhw_quick_heating
+            name: Швидкий нагрів
+          - entity: binary_sensor.kronoterm_dhw_quick_heating_active
+            name: Швидкий нагрів активний
+          - entity: binary_sensor.kronoterm_dhw_pump
+            name: Насос ГВП
+          - entity: binary_sensor.kronoterm_circulation_pump
+            name: Циркуляційний насос
+          - entity: switch.kronoterm_dhw_circulation
+            name: Циркуляція (керування)
+          - type: divider
+          - entity: number.kronoterm_dhw_eco_offset
+            name: Зміщення ECO
+          - entity: number.kronoterm_dhw_comfort_offset
+            name: Зміщення COMFORT
+          - entity: switch.kronoterm_anti_legionella
+            name: Антилегіонела
+          - entity: number.kronoterm_anti_legionella_temperature
+            name: Антилегіонела, температура
+          - entity: number.kronoterm_anti_legionella_period
+            name: Антилегіонела, період
+          - entity: number.kronoterm_anti_legionella_start
+            name: Антилегіонела, початок (хв)
+          - type: divider
+          - entity: number.kronoterm_dhw_pump_power
+            name: Потужність насоса ГВП
+          - entity: number.kronoterm_circulation_pump_power
+            name: Потужність циркуляційного
+
+  # ---------------------------------------------------------- Агрегат і налаштування
+  - title: Агрегат
+    path: unit
+    icon: mdi:heat-pump
+    type: masonry
+    cards:
+
+      - type: entities
+        title: Агрегат (компресор)
+        icon: mdi:engine
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_compressor
+            name: Компресор
+          - entity: binary_sensor.kronoterm_compressor_starting
+            name: Запуск компресора
+          - entity: binary_sensor.kronoterm_compressor_protection
+            name: Захист компресора
+          - entity: binary_sensor.kronoterm_defrost
+            name: Відтавання
+          - type: divider
+          - entity: sensor.kronoterm_flow_temperature
+            name: Подача
+          - entity: sensor.kronoterm_return_temperature
+            name: Зворотка (вхід ТН)
+          - entity: sensor.kronoterm_evaporating_temperature
+            name: Випаровування
+          - entity: sensor.kronoterm_compressor_temperature
+            name: Температура компресора
+          - type: divider
+          - entity: sensor.kronoterm_load
+            name: Навантаження
+          - entity: sensor.kronoterm_electrical_power
+            name: Електрична потужність
+          - entity: sensor.kronoterm_heating_power
+            name: Теплова потужність
+          - entity: sensor.kronoterm_cop
+            name: COP
+
+      - type: entities
+        title: Загальне
+        icon: mdi:heat-pump-outline
+        state_color: true
+        entities:
+          - entity: sensor.kronoterm_outdoor_temperature
+            name: Зовнішня температура
+          - entity: binary_sensor.kronoterm_system_running
+            name: Система працює
+          - entity: switch.kronoterm_heat_pump_enabled
+            name: Тепловий насос увімкнено
+          - entity: select.kronoterm_mode
+            name: Режим
+          - entity: select.kronoterm_program
+            name: Програма
+          - entity: sensor.kronoterm_current_function
+            name: Поточна функція
+          - entity: sensor.kronoterm_season
+            name: Сезонний режим
+          - entity: sensor.kronoterm_operation_program
+            name: Програма (стан)
+          - type: divider
+          - entity: binary_sensor.kronoterm_frost_protection
+            name: Захист від замерзання
+          - entity: binary_sensor.kronoterm_silent_mode
+            name: Тихий режим
+          - entity: binary_sensor.kronoterm_boost_mode
+            name: Boost
+          - entity: binary_sensor.kronoterm_pv_signal
+            name: Сигнал PV
+          - entity: binary_sensor.kronoterm_remote_activation
+            name: Дистанційне ввімкнення
+          - type: divider
+          - entity: switch.kronoterm_vacation
+            name: Відпустка
+          - entity: number.kronoterm_vacation_days
+            name: Відпустка, днів
+          - entity: number.kronoterm_eco_offset
+            name: Зміщення ECO
+          - entity: number.kronoterm_comfort_offset
+            name: Зміщення COMFORT
+          - entity: number.kronoterm_system_correction
+            name: Корекція температури системи
+
+      - type: entities
+        title: Додаткові джерела
+        icon: mdi:fire
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_additional_source
+            name: Додаткове джерело працює
+          - entity: switch.kronoterm_allow_additional_source
+            name: Дозволити додаткове
+          - entity: binary_sensor.kronoterm_reserve_source
+            name: Резервне джерело працює
+          - entity: switch.kronoterm_allow_reserve_source
+            name: Дозволити резервне
+
+  # ---------------------------------------------------------- Тривоги
+  - title: Тривоги
+    path: alarms
+    icon: mdi:alert
+    type: masonry
+    cards:
+
+      - type: entities
+        title: Аварії
+        icon: mdi:alert
+        state_color: true
+        entities:
+          - entity: binary_sensor.kronoterm_problem
+            name: Проблема
+          - entity: sensor.kronoterm_error_status
+            name: Стан помилок
+          - entity: sensor.kronoterm_active_alarms
+            name: Активні аварії
+          - entity: sensor.kronoterm_active_warnings
+            name: Активні попередження
+          - entity: binary_sensor.kronoterm_error_shown
+            name: Помилка на дисплеї
+          - entity: button.kronoterm_acknowledge_error
+            name: Скинути помилку
+
+  # ---------------------------------------------------------- Статистика
+  - title: Статистика
+    path: stats
+    icon: mdi:chart-bar
+    type: masonry
+    cards:
+
+      - type: entities
+        title: Статистика
+        icon: mdi:chart-bar
+        entities:
+          - entity: sensor.kronoterm_scop
+            name: SCOP
+          - type: section
+            label: Енергія (лічильники насоса)
+          - entity: sensor.kronoterm_electrical_energy
+            name: Електрична енергія
+          - entity: sensor.kronoterm_thermal_energy
+            name: Теплова енергія
+          - type: section
+            label: Енергія за призначенням
+          - entity: sensor.kronoterm_energy_heating
+            name: Опалення
+          - entity: sensor.kronoterm_energy_dhw
+            name: Гаряча вода
+          - entity: sensor.kronoterm_energy_other
+            name: Інше
+          - entity: sensor.kronoterm_energy_total_calculated
+            name: Разом (розрахунок)
+          - entity: sensor.kronoterm_energy_pumps
+            name: Насоси (оцінка)
+          - entity: sensor.kronoterm_pumps_power
+            name: Потужність насосів (оцінка)
+          - type: section
+            label: Мотогодини
+          - entity: sensor.kronoterm_hours_compressor_heating
+            name: Компресор, опалення
+          - entity: sensor.kronoterm_hours_compressor_dhw
+            name: Компресор, гаряча вода
+          - entity: sensor.kronoterm_hours_compressor_cooling
+            name: Компресор, охолодження
+          - entity: sensor.kronoterm_hours_main_pump
+            name: Головний насос
+          - entity: sensor.kronoterm_hours_dhw_pump
+            name: Насос ГВП
+          - entity: sensor.kronoterm_hours_backup_heater_1
+            name: Додатковий нагрівач 1
