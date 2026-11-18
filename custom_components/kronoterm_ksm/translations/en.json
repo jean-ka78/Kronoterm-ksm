@@ -1,0 +1,710 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Kronoterm heat pump",
+        "description": "Connection to the KSM controller over Modbus (through a Wi-Fi/Ethernet RS485 bridge).",
+        "data": {
+          "host": "Bridge address (IP or hostname)",
+          "port": "Port",
+          "protocol": "Protocol",
+          "slave_id": "Modbus address of the heat pump"
+        },
+        "data_description": {
+          "host": "For example the Pico W bridge: 192.168.1.50",
+          "protocol": "Pico W bridge from this repository = RTU over TCP. Ready-made Modbus TCP gateways = Modbus TCP.",
+          "slave_id": "Kronoterm default is 20"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to the bridge or the heat pump does not answer. Check the address, port, protocol and Modbus address.",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "This heat pump is already configured"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Kronoterm options",
+        "data": {
+          "scan_interval": "Polling interval (seconds)",
+          "thermal_multiplier": "Thermal energy multiplier"
+        },
+        "data_description": {
+          "thermal_multiplier": "Some controllers count thermal energy in other units. Leave 1 unless thermal / electrical energy differs from the SCOP."
+        }
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "rtu_over_tcp": "RTU over TCP (Pico W bridge)",
+        "tcp": "Modbus TCP (gateway)"
+      }
+    }
+  },
+  "exceptions": {
+    "write_failed": {
+      "message": "Writing to the heat pump failed: {error}"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "outdoor_temperature": {
+        "name": "Outdoor temperature"
+      },
+      "flow_temperature": {
+        "name": "Flow temperature"
+      },
+      "return_temperature": {
+        "name": "Return temperature"
+      },
+      "evaporating_temperature": {
+        "name": "Evaporating temperature"
+      },
+      "compressor_temperature": {
+        "name": "Compressor temperature"
+      },
+      "dhw_temperature": {
+        "name": "DHW temperature"
+      },
+      "dhw_current_target": {
+        "name": "DHW current target"
+      },
+      "buffer_temperature": {
+        "name": "Buffer tank temperature"
+      },
+      "buffer_target": {
+        "name": "Buffer tank target"
+      },
+      "buffer_calculated": {
+        "name": "Buffer tank calculated temperature"
+      },
+      "loop_1_temperature": {
+        "name": "Loop 1 temperature"
+      },
+      "loop_1_calculated": {
+        "name": "Loop 1 calculated flow"
+      },
+      "loop_1_room_temperature": {
+        "name": "Loop 1 room temperature"
+      },
+      "loop_1_room_target": {
+        "name": "Loop 1 current room target"
+      },
+      "loop_2_temperature": {
+        "name": "Loop 2 temperature"
+      },
+      "loop_2_calculated": {
+        "name": "Loop 2 calculated flow"
+      },
+      "loop_2_room_temperature": {
+        "name": "Loop 2 room temperature"
+      },
+      "loop_2_current_target": {
+        "name": "Loop 2 current target"
+      },
+      "loop_3_temperature": {
+        "name": "Loop 3 temperature"
+      },
+      "loop_3_calculated": {
+        "name": "Loop 3 calculated flow"
+      },
+      "loop_3_room_temperature": {
+        "name": "Loop 3 room temperature"
+      },
+      "loop_3_current_target": {
+        "name": "Loop 3 current target"
+      },
+      "loop_4_temperature": {
+        "name": "Loop 4 temperature"
+      },
+      "loop_4_calculated": {
+        "name": "Loop 4 calculated flow"
+      },
+      "loop_4_room_temperature": {
+        "name": "Loop 4 room temperature"
+      },
+      "loop_4_current_target": {
+        "name": "Loop 4 current target"
+      },
+      "alternative_source_temperature": {
+        "name": "Alternative source temperature"
+      },
+      "pool_temperature": {
+        "name": "Pool temperature"
+      },
+      "pool_current_target": {
+        "name": "Pool current target"
+      },
+      "electrical_power": {
+        "name": "Electrical power"
+      },
+      "heating_power": {
+        "name": "Heating power"
+      },
+      "load": {
+        "name": "Heat pump load"
+      },
+      "cop": {
+        "name": "COP"
+      },
+      "scop": {
+        "name": "SCOP"
+      },
+      "system_pressure": {
+        "name": "Heating system pressure"
+      },
+      "system_pressure_setting": {
+        "name": "Heating system pressure setting"
+      },
+      "electrical_energy": {
+        "name": "Electrical energy"
+      },
+      "thermal_energy": {
+        "name": "Thermal energy"
+      },
+      "groundwater_pumped": {
+        "name": "Groundwater pumped"
+      },
+      "hours_compressor_heating": {
+        "name": "Hours compressor heating"
+      },
+      "hours_compressor_dhw": {
+        "name": "Hours compressor DHW"
+      },
+      "hours_compressor_cooling": {
+        "name": "Hours compressor cooling"
+      },
+      "hours_main_pump": {
+        "name": "Hours main pump"
+      },
+      "hours_dhw_pump": {
+        "name": "Hours DHW pump"
+      },
+      "hours_backup_heater_1": {
+        "name": "Hours backup heater 1"
+      },
+      "hours_backup_heater_2": {
+        "name": "Hours backup heater 2"
+      },
+      "hours_alternative_source": {
+        "name": "Hours alternative source"
+      },
+      "hours_heat_source": {
+        "name": "Hours heat source"
+      },
+      "hours_passive_cooling": {
+        "name": "Hours passive cooling"
+      },
+      "current_function": {
+        "name": "Current function",
+        "state": {
+          "heating": "Heating",
+          "dhw": "Hot water",
+          "cooling": "Cooling",
+          "pool": "Pool heating",
+          "disinfection": "Anti-legionella",
+          "standby": "Standby",
+          "remote_off": "Remote off"
+        }
+      },
+      "error_status": {
+        "name": "Error status",
+        "state": {
+          "none": "None",
+          "warning": "Warning",
+          "alarm": "Alarm",
+          "notice": "Notice"
+        }
+      },
+      "season": {
+        "name": "Season mode",
+        "state": {
+          "cooling": "Cooling",
+          "heating": "Heating",
+          "off": "Off"
+        }
+      },
+      "operation_program": {
+        "name": "Operation program",
+        "state": {
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT",
+          "screed": "Screed drying"
+        }
+      },
+      "dhw_schedule": {
+        "name": "DHW schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "buffer_schedule": {
+        "name": "Buffer schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_1_schedule": {
+        "name": "Loop 1 schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_2_schedule": {
+        "name": "Loop 2 schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_3_schedule": {
+        "name": "Loop 3 schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_4_schedule": {
+        "name": "Loop 4 schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "pool_schedule": {
+        "name": "Pool schedule state",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "active_alarms": {
+        "name": "Active alarms"
+      },
+      "active_warnings": {
+        "name": "Active warnings"
+      },
+      "energy_heating": {
+        "name": "Energy heating"
+      },
+      "energy_dhw": {
+        "name": "Energy hot water"
+      },
+      "energy_other": {
+        "name": "Energy other"
+      },
+      "energy_total_calculated": {
+        "name": "Energy total (calculated)"
+      },
+      "energy_pumps": {
+        "name": "Energy pumps (estimate)"
+      },
+      "pumps_power": {
+        "name": "Pumps power (estimate)"
+      }
+    },
+    "binary_sensor": {
+      "system_running": {
+        "name": "System running"
+      },
+      "compressor": {
+        "name": "Compressor"
+      },
+      "compressor_2": {
+        "name": "Compressor 2"
+      },
+      "compressor_protection": {
+        "name": "Compressor protection"
+      },
+      "compressor_starting": {
+        "name": "Compressor starting"
+      },
+      "defrost": {
+        "name": "Defrost"
+      },
+      "main_pump": {
+        "name": "Main circulation pump"
+      },
+      "dhw_pump": {
+        "name": "DHW pump"
+      },
+      "circulation_pump": {
+        "name": "Circulation pump"
+      },
+      "loop_1_pump": {
+        "name": "Loop 1 pump"
+      },
+      "loop_1_demand": {
+        "name": "Loop 1 thermostat demand"
+      },
+      "loop_2_pump": {
+        "name": "Loop 2 pump"
+      },
+      "loop_2_demand": {
+        "name": "Loop 2 thermostat demand"
+      },
+      "loop_3_pump": {
+        "name": "Loop 3 pump"
+      },
+      "loop_3_demand": {
+        "name": "Loop 3 thermostat demand"
+      },
+      "loop_4_pump": {
+        "name": "Loop 4 pump"
+      },
+      "loop_4_demand": {
+        "name": "Loop 4 thermostat demand"
+      },
+      "pool_pump": {
+        "name": "Pool pump"
+      },
+      "pool_demand": {
+        "name": "Pool thermostat demand"
+      },
+      "additional_source": {
+        "name": "Additional source active"
+      },
+      "frost_protection": {
+        "name": "Frost protection"
+      },
+      "pv_signal": {
+        "name": "PV signal"
+      },
+      "silent_mode": {
+        "name": "Silent mode"
+      },
+      "boost_mode": {
+        "name": "Boost mode"
+      },
+      "reserve_source": {
+        "name": "Reserve source active"
+      },
+      "alternative_source": {
+        "name": "Alternative source active"
+      },
+      "alternative_source_pump": {
+        "name": "Alternative source pump"
+      },
+      "dhw_quick_heating_active": {
+        "name": "DHW quick heating active"
+      },
+      "remote_activation": {
+        "name": "Remote activation"
+      },
+      "error_shown": {
+        "name": "Error shown"
+      },
+      "cascade_1": {
+        "name": "Cascade 1 running"
+      },
+      "cascade_2": {
+        "name": "Cascade 2 running"
+      },
+      "cascade_3": {
+        "name": "Cascade 3 running"
+      },
+      "cascade_4": {
+        "name": "Cascade 4 running"
+      },
+      "problem": {
+        "name": "Problem"
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Mode",
+        "state": {
+          "cooling": "Cooling",
+          "heating": "Heating",
+          "auto": "Auto",
+          "off": "Off"
+        }
+      },
+      "program": {
+        "name": "Program",
+        "state": {
+          "normal": "Normal",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "dhw_mode": {
+        "name": "DHW mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      },
+      "buffer_mode": {
+        "name": "Buffer tank mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      },
+      "loop_1_mode": {
+        "name": "Loop 1 mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      },
+      "loop_2_mode": {
+        "name": "Loop 2 mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      },
+      "loop_3_mode": {
+        "name": "Loop 3 mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      },
+      "loop_4_mode": {
+        "name": "Loop 4 mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      },
+      "pool_mode": {
+        "name": "Pool mode",
+        "state": {
+          "off": "Off",
+          "normal": "Normal",
+          "schedule": "Schedule"
+        }
+      }
+    },
+    "switch": {
+      "heat_pump_enabled": {
+        "name": "Heat pump enabled"
+      },
+      "dhw_quick_heating": {
+        "name": "DHW quick heating"
+      },
+      "dhw_circulation": {
+        "name": "DHW circulation"
+      },
+      "vacation": {
+        "name": "Vacation mode"
+      },
+      "allow_additional_source": {
+        "name": "Allow additional source"
+      },
+      "allow_reserve_source": {
+        "name": "Allow reserve source"
+      },
+      "anti_legionella": {
+        "name": "Anti-legionella"
+      },
+      "loop_1_adaptive_curve": {
+        "name": "Loop 1 adaptive curve"
+      },
+      "loop_2_adaptive_curve": {
+        "name": "Loop 2 adaptive curve"
+      },
+      "loop_3_adaptive_curve": {
+        "name": "Loop 3 adaptive curve"
+      },
+      "loop_4_adaptive_curve": {
+        "name": "Loop 4 adaptive curve"
+      },
+      "remote_shutdown": {
+        "name": "Remote shutdown"
+      },
+      "screed_drying": {
+        "name": "Screed drying"
+      },
+      "system_filling": {
+        "name": "Heating system filling"
+      }
+    },
+    "number": {
+      "dhw_target": {
+        "name": "DHW target"
+      },
+      "loop_1_target": {
+        "name": "Loop 1 target"
+      },
+      "loop_2_target": {
+        "name": "Loop 2 target"
+      },
+      "loop_3_target": {
+        "name": "Loop 3 target"
+      },
+      "loop_4_target": {
+        "name": "Loop 4 target"
+      },
+      "pool_target": {
+        "name": "Pool target"
+      },
+      "eco_offset": {
+        "name": "ECO offset"
+      },
+      "comfort_offset": {
+        "name": "COMFORT offset"
+      },
+      "dhw_eco_offset": {
+        "name": "DHW ECO offset"
+      },
+      "dhw_comfort_offset": {
+        "name": "DHW COMFORT offset"
+      },
+      "loop_1_eco_offset": {
+        "name": "Loop 1 ECO offset"
+      },
+      "loop_1_comfort_offset": {
+        "name": "Loop 1 COMFORT offset"
+      },
+      "loop_2_eco_offset": {
+        "name": "Loop 2 ECO offset"
+      },
+      "loop_2_comfort_offset": {
+        "name": "Loop 2 COMFORT offset"
+      },
+      "loop_3_eco_offset": {
+        "name": "Loop 3 ECO offset"
+      },
+      "loop_3_comfort_offset": {
+        "name": "Loop 3 COMFORT offset"
+      },
+      "loop_4_eco_offset": {
+        "name": "Loop 4 ECO offset"
+      },
+      "loop_4_comfort_offset": {
+        "name": "Loop 4 COMFORT offset"
+      },
+      "pool_eco_offset": {
+        "name": "Pool ECO offset"
+      },
+      "pool_comfort_offset": {
+        "name": "Pool COMFORT offset"
+      },
+      "system_correction": {
+        "name": "System temperature correction"
+      },
+      "buffer_curve_low": {
+        "name": "Buffer curve at -15 °C"
+      },
+      "buffer_curve_high": {
+        "name": "Buffer curve at +15 °C"
+      },
+      "loop_1_curve_low": {
+        "name": "Loop 1 curve at -15 °C"
+      },
+      "loop_1_curve_high": {
+        "name": "Loop 1 curve at +15 °C"
+      },
+      "loop_2_curve_low": {
+        "name": "Loop 2 curve at -15 °C"
+      },
+      "loop_2_curve_high": {
+        "name": "Loop 2 curve at +15 °C"
+      },
+      "loop_3_curve_low": {
+        "name": "Loop 3 curve at -15 °C"
+      },
+      "loop_3_curve_high": {
+        "name": "Loop 3 curve at +15 °C"
+      },
+      "loop_4_curve_low": {
+        "name": "Loop 4 curve at -15 °C"
+      },
+      "loop_4_curve_high": {
+        "name": "Loop 4 curve at +15 °C"
+      },
+      "anti_legionella_temperature": {
+        "name": "Anti-legionella temperature"
+      },
+      "anti_legionella_period": {
+        "name": "Anti-legionella period"
+      },
+      "anti_legionella_start": {
+        "name": "Anti-legionella start (min after midnight)"
+      },
+      "vacation_days": {
+        "name": "Vacation days"
+      },
+      "solar_buffer_target": {
+        "name": "Solar buffer target"
+      },
+      "solar_boiler_target": {
+        "name": "Solar boiler target"
+      },
+      "main_pump_power": {
+        "name": "Main pump power"
+      },
+      "loop_1_pump_power": {
+        "name": "Loop 1 pump power"
+      },
+      "dhw_pump_power": {
+        "name": "DHW pump power"
+      },
+      "circulation_pump_power": {
+        "name": "Circulation pump power"
+      }
+    },
+    "button": {
+      "acknowledge_error": {
+        "name": "Acknowledge error"
+      }
+    },
+    "climate": {
+      "dhw": {
+        "name": "Hot water"
+      },
+      "buffer": {
+        "name": "Buffer tank"
+      },
+      "loop_1": {
+        "name": "Loop 1"
+      },
+      "loop_2": {
+        "name": "Loop 2"
+      },
+      "loop_3": {
+        "name": "Loop 3"
+      },
+      "loop_4": {
+        "name": "Loop 4"
+      },
+      "pool": {
+        "name": "Pool"
+      }
+    }
+  }
+}

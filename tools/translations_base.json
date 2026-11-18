@@ -1,0 +1,167 @@
+{
+  "en": {
+    "config": {
+      "step": {
+        "user": {
+          "title": "Kronoterm heat pump",
+          "description": "Connection to the KSM controller over Modbus (through a Wi-Fi/Ethernet RS485 bridge).",
+          "data": {
+            "host": "Bridge address (IP or hostname)",
+            "port": "Port",
+            "protocol": "Protocol",
+            "slave_id": "Modbus address of the heat pump"
+          },
+          "data_description": {
+            "host": "For example the Pico W bridge: 192.168.1.50",
+            "protocol": "Pico W bridge from this repository = RTU over TCP. Ready-made Modbus TCP gateways = Modbus TCP.",
+            "slave_id": "Kronoterm default is 20"
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Cannot connect to the bridge or the heat pump does not answer. Check the address, port, protocol and Modbus address.",
+        "unknown": "Unexpected error"
+      },
+      "abort": {
+        "already_configured": "This heat pump is already configured"
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Kronoterm options",
+          "data": {
+            "scan_interval": "Polling interval (seconds)",
+            "thermal_multiplier": "Thermal energy multiplier"
+          },
+          "data_description": {
+            "thermal_multiplier": "Some controllers count thermal energy in other units. Leave 1 unless thermal / electrical energy differs from the SCOP."
+          }
+        }
+      }
+    },
+    "selector": {
+      "protocol": {
+        "options": {
+          "rtu_over_tcp": "RTU over TCP (Pico W bridge)",
+          "tcp": "Modbus TCP (gateway)"
+        }
+      }
+    },
+    "exceptions": {
+      "write_failed": {
+        "message": "Writing to the heat pump failed: {error}"
+      }
+    }
+  },
+  "uk": {
+    "config": {
+      "step": {
+        "user": {
+          "title": "Тепловий насос Kronoterm",
+          "description": "Підключення до контролера KSM через Modbus (через міст RS485 у Wi-Fi/Ethernet).",
+          "data": {
+            "host": "Адреса моста (IP або ім'я)",
+            "port": "Порт",
+            "protocol": "Протокол",
+            "slave_id": "Modbus-адреса теплового насоса"
+          },
+          "data_description": {
+            "host": "Наприклад, міст Pico W: 192.168.1.50",
+            "protocol": "Міст Pico W з цього репозиторію = RTU через TCP. Готові шлюзи Modbus TCP = Modbus TCP.",
+            "slave_id": "У Kronoterm за замовчуванням 20"
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Не вдалося підключитися до моста, або тепловий насос не відповідає. Перевірте адресу, порт, протокол і Modbus-адресу.",
+        "unknown": "Непередбачена помилка"
+      },
+      "abort": {
+        "already_configured": "Цей тепловий насос уже додано"
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Налаштування Kronoterm",
+          "data": {
+            "scan_interval": "Інтервал опитування (секунди)",
+            "thermal_multiplier": "Множник теплової енергії"
+          },
+          "data_description": {
+            "thermal_multiplier": "Деякі контролери рахують теплову енергію в інших одиницях. Залиште 1, якщо теплова / електрична енергія збігається з SCOP."
+          }
+        }
+      }
+    },
+    "selector": {
+      "protocol": {
+        "options": {
+          "rtu_over_tcp": "RTU через TCP (міст Pico W)",
+          "tcp": "Modbus TCP (шлюз)"
+        }
+      }
+    },
+    "exceptions": {
+      "write_failed": {
+        "message": "Не вдалося записати в тепловий насос: {error}"
+      }
+    }
+  },
+  "sl": {
+    "config": {
+      "step": {
+        "user": {
+          "title": "Toplotna črpalka Kronoterm",
+          "description": "Povezava s krmilnikom KSM prek Modbus (prek mostu RS485 v Wi-Fi/Ethernet).",
+          "data": {
+            "host": "Naslov mostu (IP ali ime)",
+            "port": "Vrata",
+            "protocol": "Protokol",
+            "slave_id": "Modbus naslov toplotne črpalke"
+          },
+          "data_description": {
+            "host": "Na primer most Pico W: 192.168.1.50",
+            "protocol": "Most Pico W iz tega repozitorija = RTU prek TCP. Pripravljeni prehodi Modbus TCP = Modbus TCP.",
+            "slave_id": "Privzeto pri Kronotermu je 20"
+          }
+        }
+      },
+      "error": {
+        "cannot_connect": "Povezava z mostom ni uspela ali toplotna črpalka ne odgovarja. Preverite naslov, vrata, protokol in Modbus naslov.",
+        "unknown": "Nepričakovana napaka"
+      },
+      "abort": {
+        "already_configured": "Ta toplotna črpalka je že dodana"
+      }
+    },
+    "options": {
+      "step": {
+        "init": {
+          "title": "Nastavitve Kronoterm",
+          "data": {
+            "scan_interval": "Interval branja (sekunde)",
+            "thermal_multiplier": "Množitelj toplotne energije"
+          },
+          "data_description": {
+            "thermal_multiplier": "Nekateri krmilniki štejejo toplotno energijo v drugih enotah. Pustite 1, če se toplotna / električna energija ujema s SCOP."
+          }
+        }
+      }
+    },
+    "selector": {
+      "protocol": {
+        "options": {
+          "rtu_over_tcp": "RTU prek TCP (most Pico W)",
+          "tcp": "Modbus TCP (prehod)"
+        }
+      }
+    },
+    "exceptions": {
+      "write_failed": {
+        "message": "Zapis v toplotno črpalko ni uspel: {error}"
+      }
+    }
+  }
+}

@@ -1,0 +1,710 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Тепловий насос Kronoterm",
+        "description": "Підключення до контролера KSM через Modbus (через міст RS485 у Wi-Fi/Ethernet).",
+        "data": {
+          "host": "Адреса моста (IP або ім'я)",
+          "port": "Порт",
+          "protocol": "Протокол",
+          "slave_id": "Modbus-адреса теплового насоса"
+        },
+        "data_description": {
+          "host": "Наприклад, міст Pico W: 192.168.1.50",
+          "protocol": "Міст Pico W з цього репозиторію = RTU через TCP. Готові шлюзи Modbus TCP = Modbus TCP.",
+          "slave_id": "У Kronoterm за замовчуванням 20"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Не вдалося підключитися до моста, або тепловий насос не відповідає. Перевірте адресу, порт, протокол і Modbus-адресу.",
+      "unknown": "Непередбачена помилка"
+    },
+    "abort": {
+      "already_configured": "Цей тепловий насос уже додано"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Налаштування Kronoterm",
+        "data": {
+          "scan_interval": "Інтервал опитування (секунди)",
+          "thermal_multiplier": "Множник теплової енергії"
+        },
+        "data_description": {
+          "thermal_multiplier": "Деякі контролери рахують теплову енергію в інших одиницях. Залиште 1, якщо теплова / електрична енергія збігається з SCOP."
+        }
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "rtu_over_tcp": "RTU через TCP (міст Pico W)",
+        "tcp": "Modbus TCP (шлюз)"
+      }
+    }
+  },
+  "exceptions": {
+    "write_failed": {
+      "message": "Не вдалося записати в тепловий насос: {error}"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "outdoor_temperature": {
+        "name": "Зовнішня температура"
+      },
+      "flow_temperature": {
+        "name": "Температура подачі"
+      },
+      "return_temperature": {
+        "name": "Температура зворотки"
+      },
+      "evaporating_temperature": {
+        "name": "Температура випаровування"
+      },
+      "compressor_temperature": {
+        "name": "Температура компресора"
+      },
+      "dhw_temperature": {
+        "name": "Гаряча вода: температура"
+      },
+      "dhw_current_target": {
+        "name": "Гаряча вода: поточна уставка"
+      },
+      "buffer_temperature": {
+        "name": "Бак: температура"
+      },
+      "buffer_target": {
+        "name": "Бак: уставка"
+      },
+      "buffer_calculated": {
+        "name": "Бак: розрахункова температура"
+      },
+      "loop_1_temperature": {
+        "name": "Контур 1: температура"
+      },
+      "loop_1_calculated": {
+        "name": "Контур 1: розрахункова подача"
+      },
+      "loop_1_room_temperature": {
+        "name": "Контур 1: кімнатна температура"
+      },
+      "loop_1_room_target": {
+        "name": "Контур 1: поточна кімнатна уставка"
+      },
+      "loop_2_temperature": {
+        "name": "Контур 2: температура"
+      },
+      "loop_2_calculated": {
+        "name": "Контур 2: розрахункова подача"
+      },
+      "loop_2_room_temperature": {
+        "name": "Контур 2: кімнатна температура"
+      },
+      "loop_2_current_target": {
+        "name": "Контур 2: поточна уставка"
+      },
+      "loop_3_temperature": {
+        "name": "Контур 3: температура"
+      },
+      "loop_3_calculated": {
+        "name": "Контур 3: розрахункова подача"
+      },
+      "loop_3_room_temperature": {
+        "name": "Контур 3: кімнатна температура"
+      },
+      "loop_3_current_target": {
+        "name": "Контур 3: поточна уставка"
+      },
+      "loop_4_temperature": {
+        "name": "Контур 4: температура"
+      },
+      "loop_4_calculated": {
+        "name": "Контур 4: розрахункова подача"
+      },
+      "loop_4_room_temperature": {
+        "name": "Контур 4: кімнатна температура"
+      },
+      "loop_4_current_target": {
+        "name": "Контур 4: поточна уставка"
+      },
+      "alternative_source_temperature": {
+        "name": "Альтернативне джерело: температура"
+      },
+      "pool_temperature": {
+        "name": "Басейн: температура"
+      },
+      "pool_current_target": {
+        "name": "Басейн: поточна уставка"
+      },
+      "electrical_power": {
+        "name": "Електрична потужність"
+      },
+      "heating_power": {
+        "name": "Теплова потужність"
+      },
+      "load": {
+        "name": "Навантаження"
+      },
+      "cop": {
+        "name": "COP"
+      },
+      "scop": {
+        "name": "SCOP"
+      },
+      "system_pressure": {
+        "name": "Тиск системи"
+      },
+      "system_pressure_setting": {
+        "name": "Тиск системи: налаштування"
+      },
+      "electrical_energy": {
+        "name": "Електрична енергія"
+      },
+      "thermal_energy": {
+        "name": "Теплова енергія"
+      },
+      "groundwater_pumped": {
+        "name": "Перекачана ґрунтова вода"
+      },
+      "hours_compressor_heating": {
+        "name": "Мотогодини: компресор, опалення"
+      },
+      "hours_compressor_dhw": {
+        "name": "Мотогодини: компресор, гаряча вода"
+      },
+      "hours_compressor_cooling": {
+        "name": "Мотогодини: компресор, охолодження"
+      },
+      "hours_main_pump": {
+        "name": "Мотогодини: головний насос"
+      },
+      "hours_dhw_pump": {
+        "name": "Мотогодини: насос гарячої води"
+      },
+      "hours_backup_heater_1": {
+        "name": "Мотогодини: нагрівач 1"
+      },
+      "hours_backup_heater_2": {
+        "name": "Мотогодини: нагрівач 2"
+      },
+      "hours_alternative_source": {
+        "name": "Мотогодини: альтернативне джерело"
+      },
+      "hours_heat_source": {
+        "name": "Мотогодини: джерело тепла"
+      },
+      "hours_passive_cooling": {
+        "name": "Мотогодини: пасивне охолодження"
+      },
+      "current_function": {
+        "name": "Поточна функція",
+        "state": {
+          "heating": "Опалення",
+          "dhw": "Гаряча вода",
+          "cooling": "Охолодження",
+          "pool": "Нагрів басейну",
+          "disinfection": "Термічна дезінфекція",
+          "standby": "Очікування",
+          "remote_off": "Дистанційно вимкнено"
+        }
+      },
+      "error_status": {
+        "name": "Стан помилок",
+        "state": {
+          "none": "Немає",
+          "warning": "Попередження",
+          "alarm": "Аварія",
+          "notice": "Повідомлення"
+        }
+      },
+      "season": {
+        "name": "Сезонний режим",
+        "state": {
+          "cooling": "Охолодження",
+          "heating": "Опалення",
+          "off": "Вимкнено"
+        }
+      },
+      "operation_program": {
+        "name": "Програма роботи",
+        "state": {
+          "normal": "Звичайна",
+          "eco": "ECO",
+          "comfort": "COMFORT",
+          "screed": "Сушіння стяжки"
+        }
+      },
+      "dhw_schedule": {
+        "name": "Гаряча вода: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "buffer_schedule": {
+        "name": "Бак: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_1_schedule": {
+        "name": "Контур 1: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_2_schedule": {
+        "name": "Контур 2: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_3_schedule": {
+        "name": "Контур 3: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_4_schedule": {
+        "name": "Контур 4: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "pool_schedule": {
+        "name": "Басейн: за розкладом",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "active_alarms": {
+        "name": "Активні аварії"
+      },
+      "active_warnings": {
+        "name": "Активні попередження"
+      },
+      "energy_heating": {
+        "name": "Енергія: опалення"
+      },
+      "energy_dhw": {
+        "name": "Енергія: гаряча вода"
+      },
+      "energy_other": {
+        "name": "Енергія: інше"
+      },
+      "energy_total_calculated": {
+        "name": "Енергія: разом (розрахунок)"
+      },
+      "energy_pumps": {
+        "name": "Енергія: насоси (оцінка)"
+      },
+      "pumps_power": {
+        "name": "Потужність насосів (оцінка)"
+      }
+    },
+    "binary_sensor": {
+      "system_running": {
+        "name": "Система працює"
+      },
+      "compressor": {
+        "name": "Компресор"
+      },
+      "compressor_2": {
+        "name": "Компресор 2"
+      },
+      "compressor_protection": {
+        "name": "Компресор: захист"
+      },
+      "compressor_starting": {
+        "name": "Компресор: запуск"
+      },
+      "defrost": {
+        "name": "Відтавання"
+      },
+      "main_pump": {
+        "name": "Головний циркуляційний насос"
+      },
+      "dhw_pump": {
+        "name": "Насос гарячої води"
+      },
+      "circulation_pump": {
+        "name": "Циркуляційний насос"
+      },
+      "loop_1_pump": {
+        "name": "Контур 1: насос"
+      },
+      "loop_1_demand": {
+        "name": "Контур 1: запит термостата"
+      },
+      "loop_2_pump": {
+        "name": "Контур 2: насос"
+      },
+      "loop_2_demand": {
+        "name": "Контур 2: запит термостата"
+      },
+      "loop_3_pump": {
+        "name": "Контур 3: насос"
+      },
+      "loop_3_demand": {
+        "name": "Контур 3: запит термостата"
+      },
+      "loop_4_pump": {
+        "name": "Контур 4: насос"
+      },
+      "loop_4_demand": {
+        "name": "Контур 4: запит термостата"
+      },
+      "pool_pump": {
+        "name": "Басейн: насос"
+      },
+      "pool_demand": {
+        "name": "Басейн: запит термостата"
+      },
+      "additional_source": {
+        "name": "Додаткове джерело працює"
+      },
+      "frost_protection": {
+        "name": "Захист від замерзання"
+      },
+      "pv_signal": {
+        "name": "Сигнал PV"
+      },
+      "silent_mode": {
+        "name": "Тихий режим"
+      },
+      "boost_mode": {
+        "name": "Режим Boost"
+      },
+      "reserve_source": {
+        "name": "Резервне джерело працює"
+      },
+      "alternative_source": {
+        "name": "Альтернативне джерело працює"
+      },
+      "alternative_source_pump": {
+        "name": "Насос альтернативного джерела"
+      },
+      "dhw_quick_heating_active": {
+        "name": "Швидкий нагрів води активний"
+      },
+      "remote_activation": {
+        "name": "Дистанційне ввімкнення"
+      },
+      "error_shown": {
+        "name": "Помилка на дисплеї"
+      },
+      "cascade_1": {
+        "name": "Каскад 1 працює"
+      },
+      "cascade_2": {
+        "name": "Каскад 2 працює"
+      },
+      "cascade_3": {
+        "name": "Каскад 3 працює"
+      },
+      "cascade_4": {
+        "name": "Каскад 4 працює"
+      },
+      "problem": {
+        "name": "Проблема"
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Режим",
+        "state": {
+          "cooling": "Охолодження",
+          "heating": "Опалення",
+          "auto": "Авто",
+          "off": "Вимкнено"
+        }
+      },
+      "program": {
+        "name": "Програма",
+        "state": {
+          "normal": "Звичайна",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "dhw_mode": {
+        "name": "Гаряча вода: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      },
+      "buffer_mode": {
+        "name": "Бак: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      },
+      "loop_1_mode": {
+        "name": "Контур 1: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      },
+      "loop_2_mode": {
+        "name": "Контур 2: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      },
+      "loop_3_mode": {
+        "name": "Контур 3: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      },
+      "loop_4_mode": {
+        "name": "Контур 4: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      },
+      "pool_mode": {
+        "name": "Басейн: режим",
+        "state": {
+          "off": "Вимкнено",
+          "normal": "Звичайний",
+          "schedule": "За розкладом"
+        }
+      }
+    },
+    "switch": {
+      "heat_pump_enabled": {
+        "name": "Тепловий насос увімкнено"
+      },
+      "dhw_quick_heating": {
+        "name": "Швидкий нагрів води"
+      },
+      "dhw_circulation": {
+        "name": "Циркуляція гарячої води"
+      },
+      "vacation": {
+        "name": "Режим відпустки"
+      },
+      "allow_additional_source": {
+        "name": "Дозволити додаткове джерело"
+      },
+      "allow_reserve_source": {
+        "name": "Дозволити резервне джерело"
+      },
+      "anti_legionella": {
+        "name": "Антилегіонела"
+      },
+      "loop_1_adaptive_curve": {
+        "name": "Контур 1: адаптивна крива"
+      },
+      "loop_2_adaptive_curve": {
+        "name": "Контур 2: адаптивна крива"
+      },
+      "loop_3_adaptive_curve": {
+        "name": "Контур 3: адаптивна крива"
+      },
+      "loop_4_adaptive_curve": {
+        "name": "Контур 4: адаптивна крива"
+      },
+      "remote_shutdown": {
+        "name": "Дистанційне вимкнення"
+      },
+      "screed_drying": {
+        "name": "Сушіння стяжки"
+      },
+      "system_filling": {
+        "name": "Заповнення системи"
+      }
+    },
+    "number": {
+      "dhw_target": {
+        "name": "Гаряча вода: уставка"
+      },
+      "loop_1_target": {
+        "name": "Контур 1: бажана температура"
+      },
+      "loop_2_target": {
+        "name": "Контур 2: бажана температура"
+      },
+      "loop_3_target": {
+        "name": "Контур 3: бажана температура"
+      },
+      "loop_4_target": {
+        "name": "Контур 4: бажана температура"
+      },
+      "pool_target": {
+        "name": "Басейн: уставка"
+      },
+      "eco_offset": {
+        "name": "Зміщення ECO"
+      },
+      "comfort_offset": {
+        "name": "Зміщення COMFORT"
+      },
+      "dhw_eco_offset": {
+        "name": "Гаряча вода: зміщення ECO"
+      },
+      "dhw_comfort_offset": {
+        "name": "Гаряча вода: зміщення COMFORT"
+      },
+      "loop_1_eco_offset": {
+        "name": "Контур 1: зміщення ECO"
+      },
+      "loop_1_comfort_offset": {
+        "name": "Контур 1: зміщення COMFORT"
+      },
+      "loop_2_eco_offset": {
+        "name": "Контур 2: зміщення ECO"
+      },
+      "loop_2_comfort_offset": {
+        "name": "Контур 2: зміщення COMFORT"
+      },
+      "loop_3_eco_offset": {
+        "name": "Контур 3: зміщення ECO"
+      },
+      "loop_3_comfort_offset": {
+        "name": "Контур 3: зміщення COMFORT"
+      },
+      "loop_4_eco_offset": {
+        "name": "Контур 4: зміщення ECO"
+      },
+      "loop_4_comfort_offset": {
+        "name": "Контур 4: зміщення COMFORT"
+      },
+      "pool_eco_offset": {
+        "name": "Басейн: зміщення ECO"
+      },
+      "pool_comfort_offset": {
+        "name": "Басейн: зміщення COMFORT"
+      },
+      "system_correction": {
+        "name": "Корекція температури системи"
+      },
+      "buffer_curve_low": {
+        "name": "Бак: крива при -15 °C"
+      },
+      "buffer_curve_high": {
+        "name": "Бак: крива при +15 °C"
+      },
+      "loop_1_curve_low": {
+        "name": "Контур 1: крива при -15 °C"
+      },
+      "loop_1_curve_high": {
+        "name": "Контур 1: крива при +15 °C"
+      },
+      "loop_2_curve_low": {
+        "name": "Контур 2: крива при -15 °C"
+      },
+      "loop_2_curve_high": {
+        "name": "Контур 2: крива при +15 °C"
+      },
+      "loop_3_curve_low": {
+        "name": "Контур 3: крива при -15 °C"
+      },
+      "loop_3_curve_high": {
+        "name": "Контур 3: крива при +15 °C"
+      },
+      "loop_4_curve_low": {
+        "name": "Контур 4: крива при -15 °C"
+      },
+      "loop_4_curve_high": {
+        "name": "Контур 4: крива при +15 °C"
+      },
+      "anti_legionella_temperature": {
+        "name": "Антилегіонела: температура"
+      },
+      "anti_legionella_period": {
+        "name": "Антилегіонела: період"
+      },
+      "anti_legionella_start": {
+        "name": "Антилегіонела: початок (хв від півночі)"
+      },
+      "vacation_days": {
+        "name": "Відпустка, днів"
+      },
+      "solar_buffer_target": {
+        "name": "Сонячний бак: уставка"
+      },
+      "solar_boiler_target": {
+        "name": "Сонячний бойлер: уставка"
+      },
+      "main_pump_power": {
+        "name": "Головний насос: потужність"
+      },
+      "loop_1_pump_power": {
+        "name": "Насос контуру 1: потужність"
+      },
+      "dhw_pump_power": {
+        "name": "Насос гарячої води: потужність"
+      },
+      "circulation_pump_power": {
+        "name": "Циркуляційний насос: потужність"
+      }
+    },
+    "button": {
+      "acknowledge_error": {
+        "name": "Скинути помилку"
+      }
+    },
+    "climate": {
+      "dhw": {
+        "name": "Гаряча вода"
+      },
+      "buffer": {
+        "name": "Бак"
+      },
+      "loop_1": {
+        "name": "Контур 1"
+      },
+      "loop_2": {
+        "name": "Контур 2"
+      },
+      "loop_3": {
+        "name": "Контур 3"
+      },
+      "loop_4": {
+        "name": "Контур 4"
+      },
+      "pool": {
+        "name": "Басейн"
+      }
+    }
+  }
+}

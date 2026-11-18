@@ -1,0 +1,1358 @@
+[
+ {
+  "register": 2114,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Visok tlak"
+ },
+ {
+  "register": 2114,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Nizek tlak"
+ },
+ {
+  "register": 2114,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "TZ kontrola faz"
+ },
+ {
+  "register": 2114,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Ni pretoka"
+ },
+ {
+  "register": 2114,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Sanitarna voda"
+ },
+ {
+  "register": 2115,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Izpad modul 1"
+ },
+ {
+  "register": 2115,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Izpad modul 2"
+ },
+ {
+  "register": 2115,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Izpad komunikacije - zunanja enota"
+ },
+ {
+  "register": 2115,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Max. št. odtaljevanj"
+ },
+ {
+  "register": 2115,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Temperatura vira izven območja"
+ },
+ {
+  "register": 2115,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Reset modula 1"
+ },
+ {
+  "register": 2115,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Reset modula 2"
+ },
+ {
+  "register": 2115,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "Reset modula 3"
+ },
+ {
+  "register": 2115,
+  "mask": "0x8000",
+  "alarm": true,
+  "sl": "Reset modula 4"
+ },
+ {
+  "register": 2116,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala T28-kondenzator vstop (Th3)"
+ },
+ {
+  "register": 2116,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala T27-kondenzator izstop (Th2)"
+ },
+ {
+  "register": 2117,
+  "mask": "0x1",
+  "alarm": false,
+  "sl": "Visoki tlak - ogrevanja"
+ },
+ {
+  "register": 2117,
+  "mask": "0x2",
+  "alarm": false,
+  "sl": "Visoki tlak - sanitarna voda"
+ },
+ {
+  "register": 2117,
+  "mask": "0x4",
+  "alarm": false,
+  "sl": "Visoki tlak hlajenje"
+ },
+ {
+  "register": 2117,
+  "mask": "0x8",
+  "alarm": false,
+  "sl": "Visoki tlak - odtaljevanje"
+ },
+ {
+  "register": 2117,
+  "mask": "0x10",
+  "alarm": false,
+  "sl": "Nizki tlak - ogrevanje"
+ },
+ {
+  "register": 2117,
+  "mask": "0x20",
+  "alarm": false,
+  "sl": "Nizki tlak - sanitarna voda"
+ },
+ {
+  "register": 2117,
+  "mask": "0x40",
+  "alarm": false,
+  "sl": "Nizki tlak - hlajenje"
+ },
+ {
+  "register": 2117,
+  "mask": "0x80",
+  "alarm": false,
+  "sl": "Nizki tlak odtaljevanje"
+ },
+ {
+  "register": 2117,
+  "mask": "0x100",
+  "alarm": false,
+  "sl": "Ni pretoka"
+ },
+ {
+  "register": 2117,
+  "mask": "0x400",
+  "alarm": false,
+  "sl": "Minimalna temperatura dvižnega voda"
+ },
+ {
+  "register": 2117,
+  "mask": "0x1000",
+  "alarm": false,
+  "sl": "Izstopna temperatura vira izven območja"
+ },
+ {
+  "register": 2117,
+  "mask": "0x2000",
+  "alarm": false,
+  "sl": "Daljinski izklop"
+ },
+ {
+  "register": 2117,
+  "mask": "0x8000",
+  "alarm": false,
+  "sl": "Vstopna temperatura vira izven območja"
+ },
+ {
+  "register": 2118,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Visoka trenutna napetost"
+ },
+ {
+  "register": 2118,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Prevelik tok"
+ },
+ {
+  "register": 2118,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Prevelika/prenizka napetost"
+ },
+ {
+  "register": 2118,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Visok/nizek tlak"
+ },
+ {
+  "register": 2118,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Prenizka/previsoka napetost"
+ },
+ {
+  "register": 2118,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Napaka v priključitvi kompresorja"
+ },
+ {
+  "register": 2118,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "PSC napaka"
+ },
+ {
+  "register": 2118,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Visoka napetost"
+ },
+ {
+  "register": 2118,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Visoki tok na kompresorju"
+ },
+ {
+  "register": 2118,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Previsoka temp. tlačne cevi"
+ },
+ {
+  "register": 2118,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Nizek tlak"
+ },
+ {
+  "register": 2118,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Napaka senzorja el. toka"
+ },
+ {
+  "register": 2118,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Napaka tipala tlačne cevi"
+ },
+ {
+  "register": 2118,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Napaka tipala zunanje temperature"
+ },
+ {
+  "register": 2118,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "Napaka tipala vmesne temp. uparjalnika"
+ },
+ {
+  "register": 2118,
+  "mask": "0x8000",
+  "alarm": true,
+  "sl": "Napaka tipala sesalne cevi"
+ },
+ {
+  "register": 2119,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Napaka tipala na vstopu v uparjalnik"
+ },
+ {
+  "register": 2119,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Nominalna napetost previsoka"
+ },
+ {
+  "register": 2119,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Izpad komunikacije inv. PCB - glavna PCB"
+ },
+ {
+  "register": 2119,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Izpad komunikacije P1485 glavna PCB"
+ },
+ {
+  "register": 2119,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Napačno zaporedje faz"
+ },
+ {
+  "register": 2119,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Napaka v komunikaciji med notranjo in zunanjo enoto"
+ },
+ {
+  "register": 2119,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "EEPROM napaka"
+ },
+ {
+  "register": 2119,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Previsoka temp. na vstopu v kondenzator"
+ },
+ {
+  "register": 2119,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Previsoka temp. tlačne cevi"
+ },
+ {
+  "register": 2119,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Prenizka temp. uparjanja"
+ },
+ {
+  "register": 2119,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Napaka tipala tlačne cevi"
+ },
+ {
+  "register": 2119,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Napaka na ventilatorju"
+ },
+ {
+  "register": 2119,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Previsoki vhodni tok"
+ },
+ {
+  "register": 2119,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Previsoko razmerje tlakov"
+ },
+ {
+  "register": 2119,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "Ni nastavljenega modela"
+ },
+ {
+  "register": 2119,
+  "mask": "0x8000",
+  "alarm": true,
+  "sl": "Napaka na zunanji enoti"
+ },
+ {
+  "register": 2120,
+  "mask": "0x1",
+  "alarm": false,
+  "sl": "Visoka trenutna napetost"
+ },
+ {
+  "register": 2120,
+  "mask": "0x2",
+  "alarm": false,
+  "sl": "Prevelik tok"
+ },
+ {
+  "register": 2120,
+  "mask": "0x4",
+  "alarm": false,
+  "sl": "Prevelika/prenizka napetost"
+ },
+ {
+  "register": 2120,
+  "mask": "0x8",
+  "alarm": false,
+  "sl": "Visok/nizek tlak"
+ },
+ {
+  "register": 2120,
+  "mask": "0x10",
+  "alarm": false,
+  "sl": "Prenizka/previsoka napetost"
+ },
+ {
+  "register": 2120,
+  "mask": "0x20",
+  "alarm": false,
+  "sl": "Napaka v priključitvi kompresorja"
+ },
+ {
+  "register": 2120,
+  "mask": "0x40",
+  "alarm": false,
+  "sl": "PSC napaka"
+ },
+ {
+  "register": 2120,
+  "mask": "0x80",
+  "alarm": false,
+  "sl": "Visoka napetost"
+ },
+ {
+  "register": 2120,
+  "mask": "0x100",
+  "alarm": false,
+  "sl": "Visoki tok na kompresorju"
+ },
+ {
+  "register": 2120,
+  "mask": "0x200",
+  "alarm": false,
+  "sl": "Previsoka temp. tlačne cevi"
+ },
+ {
+  "register": 2120,
+  "mask": "0x400",
+  "alarm": false,
+  "sl": "Nizek tlak"
+ },
+ {
+  "register": 2120,
+  "mask": "0x800",
+  "alarm": false,
+  "sl": "Napaka senzorja el. Toka"
+ },
+ {
+  "register": 2120,
+  "mask": "0x1000",
+  "alarm": false,
+  "sl": "Napaka tipala tlačne cevi"
+ },
+ {
+  "register": 2120,
+  "mask": "0x2000",
+  "alarm": false,
+  "sl": "Napaka tipala zunanje temperature"
+ },
+ {
+  "register": 2120,
+  "mask": "0x4000",
+  "alarm": false,
+  "sl": "Napaka tipala vmesne temp. uparjalnika"
+ },
+ {
+  "register": 2120,
+  "mask": "0x8000",
+  "alarm": false,
+  "sl": "Napaka tipala sesalne cevi"
+ },
+ {
+  "register": 2121,
+  "mask": "0x1",
+  "alarm": false,
+  "sl": "Napaka tipala na vstopu v uparjalnik"
+ },
+ {
+  "register": 2121,
+  "mask": "0x2",
+  "alarm": false,
+  "sl": "Nominalna napetost previsoka"
+ },
+ {
+  "register": 2121,
+  "mask": "0x4",
+  "alarm": false,
+  "sl": "Izpad komunikacije inv. PCB - glavna PCB"
+ },
+ {
+  "register": 2121,
+  "mask": "0x8",
+  "alarm": false,
+  "sl": "Izpad komunikacije P1485 - glavna PCB"
+ },
+ {
+  "register": 2121,
+  "mask": "0x10",
+  "alarm": false,
+  "sl": "Napačno zaporedje faz"
+ },
+ {
+  "register": 2121,
+  "mask": "0x20",
+  "alarm": false,
+  "sl": "Napaka v komunikaciji med notranjo in zunanjo enoto"
+ },
+ {
+  "register": 2121,
+  "mask": "0x40",
+  "alarm": false,
+  "sl": "EEPROM napaka"
+ },
+ {
+  "register": 2121,
+  "mask": "0x80",
+  "alarm": false,
+  "sl": "Previsoka temp. na vstopu v kondenzator"
+ },
+ {
+  "register": 2121,
+  "mask": "0x100",
+  "alarm": false,
+  "sl": "Previsoka temp. tlačne cevi"
+ },
+ {
+  "register": 2121,
+  "mask": "0x200",
+  "alarm": false,
+  "sl": "Prenizka temp. uparjanja"
+ },
+ {
+  "register": 2121,
+  "mask": "0x400",
+  "alarm": false,
+  "sl": "Napaka tipala tlačne cevi"
+ },
+ {
+  "register": 2121,
+  "mask": "0x800",
+  "alarm": false,
+  "sl": "Napaka na ventilatorju"
+ },
+ {
+  "register": 2121,
+  "mask": "0x1000",
+  "alarm": false,
+  "sl": "Napaka tipala na vstopu v uparjalnik"
+ },
+ {
+  "register": 2121,
+  "mask": "0x2000",
+  "alarm": false,
+  "sl": "Previsoko razmerje tlakov"
+ },
+ {
+  "register": 2127,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Odpoved tlačnega tipala - vir (T31)"
+ },
+ {
+  "register": 2127,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Ni pretoka na viru"
+ },
+ {
+  "register": 2127,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Ni pretoka na vrtini"
+ },
+ {
+  "register": 2186,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Izpad termostata ogrevalnega kroga 1"
+ },
+ {
+  "register": 2186,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Izpad termostata ogrevalnega kroga 2"
+ },
+ {
+  "register": 2186,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Izpad termostata ogrevalnega kroga 3"
+ },
+ {
+  "register": 2186,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Izpad termostata ogrevalnega kroga 4"
+ },
+ {
+  "register": 2124,
+  "mask": "0x80",
+  "alarm": false,
+  "sl": "Ni odziva kaskadnih enot"
+ },
+ {
+  "register": 2124,
+  "mask": "0x100",
+  "alarm": false,
+  "sl": "Preveri kaskadno enoto 1"
+ },
+ {
+  "register": 2124,
+  "mask": "0x200",
+  "alarm": false,
+  "sl": "Preveri kaskadno enoto 2"
+ },
+ {
+  "register": 2124,
+  "mask": "0x400",
+  "alarm": false,
+  "sl": "Preveri kaskadno enoto 3"
+ },
+ {
+  "register": 2124,
+  "mask": "0x800",
+  "alarm": false,
+  "sl": "Preveri kaskadno enoto 4"
+ },
+ {
+  "register": 2126,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Izpad komunikacije s kaskadno enoto 2"
+ },
+ {
+  "register": 2126,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Izpad komunikacije s kaskadno enoto 3"
+ },
+ {
+  "register": 2126,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Izpad komunikacije s kaskadno enoto 4"
+ },
+ {
+  "register": 2126,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Alarm na kaskadni enoti 1"
+ },
+ {
+  "register": 2126,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Alarm na kaskadni enoti 2"
+ },
+ {
+  "register": 2126,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Alarm na kaskadni enoti 3"
+ },
+ {
+  "register": 2126,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Alarm na kaskadni enoti 4"
+ },
+ {
+  "register": 2330,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Nizek tlak"
+ },
+ {
+  "register": 2330,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Nizko pregretje"
+ },
+ {
+  "register": 2330,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Visoko pregretje"
+ },
+ {
+  "register": 2330,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "EVI visoko pregretje"
+ },
+ {
+  "register": 2330,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Puščanje hladiva"
+ },
+ {
+  "register": 2330,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Opozorilo: Visok tlak kondenzacije"
+ },
+ {
+  "register": 2330,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Prenizka temperatura kondenzacije Tc"
+ },
+ {
+  "register": 2330,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Previsoka temperatura kondenzacije Tc"
+ },
+ {
+  "register": 2330,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Prenizka temperatura uparjanja Te"
+ },
+ {
+  "register": 2330,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Previsoka temperatura uparjanja Te"
+ },
+ {
+  "register": 2330,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Freeze alarm"
+ },
+ {
+  "register": 2330,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Napaka območje delovanja"
+ },
+ {
+  "register": 2330,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Maksimalen čas odtaljevanja"
+ },
+ {
+  "register": 2330,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "MCU Arithmetic error"
+ },
+ {
+  "register": 2330,
+  "mask": "0x8000",
+  "alarm": true,
+  "sl": "Previsoka temperatura tlačnih plinov"
+ },
+ {
+  "register": 2331,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "4-potni ventil"
+ },
+ {
+  "register": 2331,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Območje visoke temperature tlačnih plinov (opozorilo)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Glavni EEV (elektronski ekspanzijski ventil)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "EEV 2"
+ },
+ {
+  "register": 2332,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Grelec karterja ne deluje"
+ },
+ {
+  "register": 2332,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Odpoved tlač. tipala nizek tlak (T23)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Odpoved tlač. tipala - visok tlak (T22)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Ni povratne informacije o hitrosti kompresorja"
+ },
+ {
+  "register": 2332,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - sesalna cev kompresor (T19) / tekočinska cev (T20)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala tekočinska cev (T20) / zunanja, TČ (T17)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - tlačni plini (T18) / sesalna uparjalnik (T33)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala tekočinska cev hlajenje (T21) / sesalna cev kompresor (T19)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala povratni vod TČ (T16) / tlačna kondenzator (T34)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala zunanja, TČ (T17) / povratni vod TC (T16)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - dvižni vod TČ (T15)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - tlačni plini (T18)"
+ },
+ {
+  "register": 2332,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "Izpad komunikacije - pogon kompresorja"
+ },
+ {
+  "register": 2333,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Napaka - visokotlačno stikalo"
+ },
+ {
+  "register": 2333,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Pogon kompresorja zaklenjen"
+ },
+ {
+  "register": 2333,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Odpoved EEPROM"
+ },
+ {
+  "register": 2333,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Izpad komunikacije - SEC Mono/OUC"
+ },
+ {
+  "register": 2333,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Alarm kompresorja (VSS1...VSS5)"
+ },
+ {
+  "register": 2333,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Napačna nastavitev pogona kompresorja"
+ },
+ {
+  "register": 2333,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Napačna konfiguracija kompresorja"
+ },
+ {
+  "register": 2334,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Napaka senzorja toka kompresorja U"
+ },
+ {
+  "register": 2334,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Napaka senzorja toka kompresorja V"
+ },
+ {
+  "register": 2334,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Napaka senzorja toka kompresorja W"
+ },
+ {
+  "register": 2334,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Napaka tokovnega senzorja PFC"
+ },
+ {
+  "register": 2334,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Napaka temperaturnega senzorja IPM"
+ },
+ {
+  "register": 2334,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Napaka temperaturnega senzorja PFC"
+ },
+ {
+  "register": 2334,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Napaka senzorja DLT"
+ },
+ {
+  "register": 2335,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Napaka komunikacije Sec Mono/OUC in pogon kompresorja"
+ },
+ {
+  "register": 2335,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Napaka EEPROM"
+ },
+ {
+  "register": 2335,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Previsok AC tok"
+ },
+ {
+  "register": 2335,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Previsoka AC napetost"
+ },
+ {
+  "register": 2335,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Prenizka AC napetost"
+ },
+ {
+  "register": 2335,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Previsoka DC napetost"
+ },
+ {
+  "register": 2335,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Prenizka DC napetost"
+ },
+ {
+  "register": 2335,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Visok tlak"
+ },
+ {
+  "register": 2335,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Napaka pravilnega zaporedja faz"
+ },
+ {
+  "register": 2335,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Previsoka temperatura IPM"
+ },
+ {
+  "register": 2335,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Previsoka temperatura IGBT"
+ },
+ {
+  "register": 2335,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Kodiranje kompresorja nepravilno"
+ },
+ {
+  "register": 2336,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Previsok tok v HW delu kompresorja"
+ },
+ {
+  "register": 2336,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Previsok tok kompresorja na fazi U"
+ },
+ {
+  "register": 2336,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Previsok tok kompresorja na fazi V"
+ },
+ {
+  "register": 2336,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Previsok tok kompresorja na fazi W"
+ },
+ {
+  "register": 2336,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Ena priključna faza kompresorja ni prisotna"
+ },
+ {
+  "register": 2336,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Rotor kompresorja ni poravnan"
+ },
+ {
+  "register": 2336,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Zagonski protokol kompresorja neizveden"
+ },
+ {
+  "register": 2336,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Preobremenitev kompresorja"
+ },
+ {
+  "register": 2336,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Presežena temperatura DLT kompresorja"
+ },
+ {
+  "register": 2336,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "IPM-močnostni modul inverterja"
+ },
+ {
+  "register": 2336,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "2. rotor kompresorja ne deluje"
+ },
+ {
+  "register": 2336,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "3. rotor kompresorja ne deluje"
+ },
+ {
+  "register": 2337,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "PFC HW previsok tok"
+ },
+ {
+  "register": 2337,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "PFC SW previsok tok"
+ },
+ {
+  "register": 2337,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "PFC previsoka napetost"
+ },
+ {
+  "register": 2338,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "A/D pretvornik v napaki"
+ },
+ {
+  "register": 2338,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Napačen naslov"
+ },
+ {
+  "register": 2339,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala bojler (T1)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - zunanja za ogrevalni sistem (T2)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala 1. krog (T3)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - 2. krog (T4)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala 3. krog (T5)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala 4. krog (T6)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - bazen (T7)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala solar/biomasa (T8)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - zalogovnik 1 (T9)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala zalogovnik 2 (T10)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - vir vstop (T11)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - vir izstop (T12)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - dvižni vod TČ (T15)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala povratni vod TČ (T16)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - dvižni vod za ele. Grelo (T13)"
+ },
+ {
+  "register": 2339,
+  "mask": "0x8000",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala povratni vod notranja enota (T14)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x1",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala zunanja, TČ (T17)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x2",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala tlačni plini (T18)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x4",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala - sesalna cev kompresor (T19)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x8",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala tekočinska cev (T20)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x10",
+  "alarm": true,
+  "sl": "Odpoved temp. tipala tekočinska cev/hlajenje (T21)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x20",
+  "alarm": true,
+  "sl": "Odpoved tlač. tipala - visok tlak (T22)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x40",
+  "alarm": true,
+  "sl": "Odpoved tlač. tipala nizek tlak (T23)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x80",
+  "alarm": true,
+  "sl": "Odpoved tlač. tipala ogrevalni sistem (T25)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x100",
+  "alarm": true,
+  "sl": "Odpoved merilnika pretoka - ogrevanje (T26)"
+ },
+ {
+  "register": 2340,
+  "mask": "0x200",
+  "alarm": true,
+  "sl": "Napaka SD kartice"
+ },
+ {
+  "register": 2340,
+  "mask": "0x400",
+  "alarm": true,
+  "sl": "4-potni ventil x-krat/dan"
+ },
+ {
+  "register": 2340,
+  "mask": "0x800",
+  "alarm": true,
+  "sl": "Nizko pregretje x-krat/dan"
+ },
+ {
+  "register": 2340,
+  "mask": "0x1000",
+  "alarm": true,
+  "sl": "Visoko pregretje x-krat/dan"
+ },
+ {
+  "register": 2340,
+  "mask": "0x2000",
+  "alarm": true,
+  "sl": "Envelope Tc high x-krat/uro"
+ },
+ {
+  "register": 2340,
+  "mask": "0x4000",
+  "alarm": true,
+  "sl": "Prenizka temperatura uparjanja Te x-krat/uro"
+ },
+ {
+  "register": 2341,
+  "mask": "0x1",
+  "alarm": false,
+  "sl": "Visoka kondenzacija ogrevanje"
+ },
+ {
+  "register": 2341,
+  "mask": "0x2",
+  "alarm": false,
+  "sl": "Visoka kondenzacija hranilnik tople sanitarne vode"
+ },
+ {
+  "register": 2341,
+  "mask": "0x4",
+  "alarm": false,
+  "sl": "Visoka kondenzacija hlajenje"
+ },
+ {
+  "register": 2341,
+  "mask": "0x8",
+  "alarm": false,
+  "sl": "Visoka kondenzacija odtaljevanje"
+ },
+ {
+  "register": 2341,
+  "mask": "0x10",
+  "alarm": false,
+  "sl": "Nizek tlak ogrevalnega sistema"
+ },
+ {
+  "register": 2341,
+  "mask": "0x20",
+  "alarm": false,
+  "sl": "Ogrevanje izven območja"
+ },
+ {
+  "register": 2341,
+  "mask": "0x40",
+  "alarm": false,
+  "sl": "Hlajenje izven območja"
+ },
+ {
+  "register": 2341,
+  "mask": "0x80",
+  "alarm": false,
+  "sl": "Nizek tlak vira"
+ },
+ {
+  "register": 2341,
+  "mask": "0x100",
+  "alarm": false,
+  "sl": "Ni pretoka na viru"
+ },
+ {
+  "register": 2341,
+  "mask": "0x200",
+  "alarm": false,
+  "sl": "Ni pretoka na vrtini"
+ }
+]

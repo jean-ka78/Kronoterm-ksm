@@ -1,0 +1,710 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Toplotna črpalka Kronoterm",
+        "description": "Povezava s krmilnikom KSM prek Modbus (prek mostu RS485 v Wi-Fi/Ethernet).",
+        "data": {
+          "host": "Naslov mostu (IP ali ime)",
+          "port": "Vrata",
+          "protocol": "Protokol",
+          "slave_id": "Modbus naslov toplotne črpalke"
+        },
+        "data_description": {
+          "host": "Na primer most Pico W: 192.168.1.50",
+          "protocol": "Most Pico W iz tega repozitorija = RTU prek TCP. Pripravljeni prehodi Modbus TCP = Modbus TCP.",
+          "slave_id": "Privzeto pri Kronotermu je 20"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Povezava z mostom ni uspela ali toplotna črpalka ne odgovarja. Preverite naslov, vrata, protokol in Modbus naslov.",
+      "unknown": "Nepričakovana napaka"
+    },
+    "abort": {
+      "already_configured": "Ta toplotna črpalka je že dodana"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Nastavitve Kronoterm",
+        "data": {
+          "scan_interval": "Interval branja (sekunde)",
+          "thermal_multiplier": "Množitelj toplotne energije"
+        },
+        "data_description": {
+          "thermal_multiplier": "Nekateri krmilniki štejejo toplotno energijo v drugih enotah. Pustite 1, če se toplotna / električna energija ujema s SCOP."
+        }
+      }
+    }
+  },
+  "selector": {
+    "protocol": {
+      "options": {
+        "rtu_over_tcp": "RTU prek TCP (most Pico W)",
+        "tcp": "Modbus TCP (prehod)"
+      }
+    }
+  },
+  "exceptions": {
+    "write_failed": {
+      "message": "Zapis v toplotno črpalko ni uspel: {error}"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "outdoor_temperature": {
+        "name": "Zunanja temperatura"
+      },
+      "flow_temperature": {
+        "name": "Temperatura dvižnega voda"
+      },
+      "return_temperature": {
+        "name": "Temperatura povratnega voda"
+      },
+      "evaporating_temperature": {
+        "name": "Temperatura uparjanja"
+      },
+      "compressor_temperature": {
+        "name": "Temperatura kompresorja"
+      },
+      "dhw_temperature": {
+        "name": "Sanitarna voda: temperatura"
+      },
+      "dhw_current_target": {
+        "name": "Sanitarna voda: trenutna želena"
+      },
+      "buffer_temperature": {
+        "name": "Zalogovnik: temperatura"
+      },
+      "buffer_target": {
+        "name": "Zalogovnik: želena temperatura"
+      },
+      "buffer_calculated": {
+        "name": "Zalogovnik: izračunana temperatura"
+      },
+      "loop_1_temperature": {
+        "name": "Krog 1: temperatura"
+      },
+      "loop_1_calculated": {
+        "name": "Krog 1: izračunana temperatura"
+      },
+      "loop_1_room_temperature": {
+        "name": "Krog 1: sobna temperatura"
+      },
+      "loop_1_room_target": {
+        "name": "Krog 1: trenutna želena sobna"
+      },
+      "loop_2_temperature": {
+        "name": "Krog 2: temperatura"
+      },
+      "loop_2_calculated": {
+        "name": "Krog 2: izračunana temperatura"
+      },
+      "loop_2_room_temperature": {
+        "name": "Krog 2: sobna temperatura"
+      },
+      "loop_2_current_target": {
+        "name": "Krog 2: trenutna želena"
+      },
+      "loop_3_temperature": {
+        "name": "Krog 3: temperatura"
+      },
+      "loop_3_calculated": {
+        "name": "Krog 3: izračunana temperatura"
+      },
+      "loop_3_room_temperature": {
+        "name": "Krog 3: sobna temperatura"
+      },
+      "loop_3_current_target": {
+        "name": "Krog 3: trenutna želena"
+      },
+      "loop_4_temperature": {
+        "name": "Krog 4: temperatura"
+      },
+      "loop_4_calculated": {
+        "name": "Krog 4: izračunana temperatura"
+      },
+      "loop_4_room_temperature": {
+        "name": "Krog 4: sobna temperatura"
+      },
+      "loop_4_current_target": {
+        "name": "Krog 4: trenutna želena"
+      },
+      "alternative_source_temperature": {
+        "name": "Alternativni vir: temperatura"
+      },
+      "pool_temperature": {
+        "name": "Bazen: temperatura"
+      },
+      "pool_current_target": {
+        "name": "Bazen: trenutna želena"
+      },
+      "electrical_power": {
+        "name": "Električna moč"
+      },
+      "heating_power": {
+        "name": "Grelna moč"
+      },
+      "load": {
+        "name": "Obremenitev TČ"
+      },
+      "cop": {
+        "name": "COP"
+      },
+      "scop": {
+        "name": "SCOP"
+      },
+      "system_pressure": {
+        "name": "Tlak ogrevalnega sistema"
+      },
+      "system_pressure_setting": {
+        "name": "Nastavitev tlaka sistema"
+      },
+      "electrical_energy": {
+        "name": "Električna energija"
+      },
+      "thermal_energy": {
+        "name": "Toplotna energija"
+      },
+      "groundwater_pumped": {
+        "name": "Prečrpana podtalnica"
+      },
+      "hours_compressor_heating": {
+        "name": "Ure kompresor ogrevanje"
+      },
+      "hours_compressor_dhw": {
+        "name": "Ure kompresor sanitarna voda"
+      },
+      "hours_compressor_cooling": {
+        "name": "Ure kompresor hlajenje"
+      },
+      "hours_main_pump": {
+        "name": "Ure glavna obtočna črpalka"
+      },
+      "hours_dhw_pump": {
+        "name": "Ure sanitarna črpalka"
+      },
+      "hours_backup_heater_1": {
+        "name": "Ure dodatno grelo 1"
+      },
+      "hours_backup_heater_2": {
+        "name": "Ure dodatno grelo 2"
+      },
+      "hours_alternative_source": {
+        "name": "Ure alternativni vir"
+      },
+      "hours_heat_source": {
+        "name": "Ure toplotni vir"
+      },
+      "hours_passive_cooling": {
+        "name": "Ure pasivno hlajenje"
+      },
+      "current_function": {
+        "name": "Trenutna funkcija",
+        "state": {
+          "heating": "Ogrevanje",
+          "dhw": "Sanitarna voda",
+          "cooling": "Hlajenje",
+          "pool": "Ogrevanje bazena",
+          "disinfection": "Termična dezinfekcija",
+          "standby": "Mirovanje",
+          "remote_off": "Daljinski izklop"
+        }
+      },
+      "error_status": {
+        "name": "Status napake",
+        "state": {
+          "none": "Brez",
+          "warning": "Opozorilo",
+          "alarm": "Alarm",
+          "notice": "Obvestilo"
+        }
+      },
+      "season": {
+        "name": "Režim delovanja",
+        "state": {
+          "cooling": "Hlajenje",
+          "heating": "Ogrevanje",
+          "off": "Izklop"
+        }
+      },
+      "operation_program": {
+        "name": "Program delovanja",
+        "state": {
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT",
+          "screed": "Sušenje estriha"
+        }
+      },
+      "dhw_schedule": {
+        "name": "Sanitarna voda: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "buffer_schedule": {
+        "name": "Zalogovnik: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_1_schedule": {
+        "name": "Krog 1: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_2_schedule": {
+        "name": "Krog 2: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_3_schedule": {
+        "name": "Krog 3: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "loop_4_schedule": {
+        "name": "Krog 4: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "pool_schedule": {
+        "name": "Bazen: po urniku",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "active_alarms": {
+        "name": "Aktivni alarmi"
+      },
+      "active_warnings": {
+        "name": "Aktivna opozorila"
+      },
+      "energy_heating": {
+        "name": "Energija: ogrevanje"
+      },
+      "energy_dhw": {
+        "name": "Energija: sanitarna voda"
+      },
+      "energy_other": {
+        "name": "Energija: ostalo"
+      },
+      "energy_total_calculated": {
+        "name": "Energija: skupaj (izračun)"
+      },
+      "energy_pumps": {
+        "name": "Energija: črpalke (ocena)"
+      },
+      "pumps_power": {
+        "name": "Moč črpalk (ocena)"
+      }
+    },
+    "binary_sensor": {
+      "system_running": {
+        "name": "Sistem deluje"
+      },
+      "compressor": {
+        "name": "Kompresor"
+      },
+      "compressor_2": {
+        "name": "Kompresor 2"
+      },
+      "compressor_protection": {
+        "name": "Kompresor: varovanje"
+      },
+      "compressor_starting": {
+        "name": "Kompresor: zagon"
+      },
+      "defrost": {
+        "name": "Odtaljevanje"
+      },
+      "main_pump": {
+        "name": "Glavna obtočna črpalka"
+      },
+      "dhw_pump": {
+        "name": "Črpalka sanitarne vode"
+      },
+      "circulation_pump": {
+        "name": "Cirkulacijska črpalka"
+      },
+      "loop_1_pump": {
+        "name": "Krog 1: črpalka"
+      },
+      "loop_1_demand": {
+        "name": "Krog 1: zahteva termostata"
+      },
+      "loop_2_pump": {
+        "name": "Krog 2: črpalka"
+      },
+      "loop_2_demand": {
+        "name": "Krog 2: zahteva termostata"
+      },
+      "loop_3_pump": {
+        "name": "Krog 3: črpalka"
+      },
+      "loop_3_demand": {
+        "name": "Krog 3: zahteva termostata"
+      },
+      "loop_4_pump": {
+        "name": "Krog 4: črpalka"
+      },
+      "loop_4_demand": {
+        "name": "Krog 4: zahteva termostata"
+      },
+      "pool_pump": {
+        "name": "Bazen: črpalka"
+      },
+      "pool_demand": {
+        "name": "Bazen: zahteva termostata"
+      },
+      "additional_source": {
+        "name": "Dodatni vir deluje"
+      },
+      "frost_protection": {
+        "name": "Zaščita pred zmrzaljo"
+      },
+      "pv_signal": {
+        "name": "Signal PV"
+      },
+      "silent_mode": {
+        "name": "Tihi način"
+      },
+      "boost_mode": {
+        "name": "Način Boost"
+      },
+      "reserve_source": {
+        "name": "Rezervni vir deluje"
+      },
+      "alternative_source": {
+        "name": "Alternativni vir deluje"
+      },
+      "alternative_source_pump": {
+        "name": "Črpalka alternativnega vira"
+      },
+      "dhw_quick_heating_active": {
+        "name": "Hitro segrevanje aktivno"
+      },
+      "remote_activation": {
+        "name": "Daljinski vklop"
+      },
+      "error_shown": {
+        "name": "Prikazana napaka"
+      },
+      "cascade_1": {
+        "name": "Kaskada 1 deluje"
+      },
+      "cascade_2": {
+        "name": "Kaskada 2 deluje"
+      },
+      "cascade_3": {
+        "name": "Kaskada 3 deluje"
+      },
+      "cascade_4": {
+        "name": "Kaskada 4 deluje"
+      },
+      "problem": {
+        "name": "Težava"
+      }
+    },
+    "select": {
+      "mode": {
+        "name": "Režim",
+        "state": {
+          "cooling": "Hlajenje",
+          "heating": "Ogrevanje",
+          "auto": "Samodejno",
+          "off": "Izklop"
+        }
+      },
+      "program": {
+        "name": "Program",
+        "state": {
+          "normal": "Normalno",
+          "eco": "ECO",
+          "comfort": "COMFORT"
+        }
+      },
+      "dhw_mode": {
+        "name": "Sanitarna voda: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      },
+      "buffer_mode": {
+        "name": "Zalogovnik: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      },
+      "loop_1_mode": {
+        "name": "Krog 1: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      },
+      "loop_2_mode": {
+        "name": "Krog 2: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      },
+      "loop_3_mode": {
+        "name": "Krog 3: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      },
+      "loop_4_mode": {
+        "name": "Krog 4: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      },
+      "pool_mode": {
+        "name": "Bazen: režim",
+        "state": {
+          "off": "Izklop",
+          "normal": "Normalno",
+          "schedule": "Po urniku"
+        }
+      }
+    },
+    "switch": {
+      "heat_pump_enabled": {
+        "name": "Toplotna črpalka vklopljena"
+      },
+      "dhw_quick_heating": {
+        "name": "Hitro segrevanje sanitarne vode"
+      },
+      "dhw_circulation": {
+        "name": "Cirkulacija sanitarne vode"
+      },
+      "vacation": {
+        "name": "Dopust"
+      },
+      "allow_additional_source": {
+        "name": "Dovoli dodatni vir"
+      },
+      "allow_reserve_source": {
+        "name": "Dovoli rezervni vir"
+      },
+      "anti_legionella": {
+        "name": "Termična dezinfekcija"
+      },
+      "loop_1_adaptive_curve": {
+        "name": "Krog 1: adaptivna krivulja"
+      },
+      "loop_2_adaptive_curve": {
+        "name": "Krog 2: adaptivna krivulja"
+      },
+      "loop_3_adaptive_curve": {
+        "name": "Krog 3: adaptivna krivulja"
+      },
+      "loop_4_adaptive_curve": {
+        "name": "Krog 4: adaptivna krivulja"
+      },
+      "remote_shutdown": {
+        "name": "Daljinski izklop funkcij"
+      },
+      "screed_drying": {
+        "name": "Sušenje estriha"
+      },
+      "system_filling": {
+        "name": "Polnjenje sistema"
+      }
+    },
+    "number": {
+      "dhw_target": {
+        "name": "Sanitarna voda: želena"
+      },
+      "loop_1_target": {
+        "name": "Krog 1: želena temperatura"
+      },
+      "loop_2_target": {
+        "name": "Krog 2: želena temperatura"
+      },
+      "loop_3_target": {
+        "name": "Krog 3: želena temperatura"
+      },
+      "loop_4_target": {
+        "name": "Krog 4: želena temperatura"
+      },
+      "pool_target": {
+        "name": "Bazen: želena"
+      },
+      "eco_offset": {
+        "name": "Odmik ECO"
+      },
+      "comfort_offset": {
+        "name": "Odmik COMFORT"
+      },
+      "dhw_eco_offset": {
+        "name": "Sanitarna voda: odmik ECO"
+      },
+      "dhw_comfort_offset": {
+        "name": "Sanitarna voda: odmik COMFORT"
+      },
+      "loop_1_eco_offset": {
+        "name": "Krog 1: odmik ECO"
+      },
+      "loop_1_comfort_offset": {
+        "name": "Krog 1: odmik COMFORT"
+      },
+      "loop_2_eco_offset": {
+        "name": "Krog 2: odmik ECO"
+      },
+      "loop_2_comfort_offset": {
+        "name": "Krog 2: odmik COMFORT"
+      },
+      "loop_3_eco_offset": {
+        "name": "Krog 3: odmik ECO"
+      },
+      "loop_3_comfort_offset": {
+        "name": "Krog 3: odmik COMFORT"
+      },
+      "loop_4_eco_offset": {
+        "name": "Krog 4: odmik ECO"
+      },
+      "loop_4_comfort_offset": {
+        "name": "Krog 4: odmik COMFORT"
+      },
+      "pool_eco_offset": {
+        "name": "Bazen: odmik ECO"
+      },
+      "pool_comfort_offset": {
+        "name": "Bazen: odmik COMFORT"
+      },
+      "system_correction": {
+        "name": "Korekcija temperature sistema"
+      },
+      "buffer_curve_low": {
+        "name": "Zalogovnik: krivulja pri -15 °C"
+      },
+      "buffer_curve_high": {
+        "name": "Zalogovnik: krivulja pri +15 °C"
+      },
+      "loop_1_curve_low": {
+        "name": "Krog 1: krivulja pri -15 °C"
+      },
+      "loop_1_curve_high": {
+        "name": "Krog 1: krivulja pri +15 °C"
+      },
+      "loop_2_curve_low": {
+        "name": "Krog 2: krivulja pri -15 °C"
+      },
+      "loop_2_curve_high": {
+        "name": "Krog 2: krivulja pri +15 °C"
+      },
+      "loop_3_curve_low": {
+        "name": "Krog 3: krivulja pri -15 °C"
+      },
+      "loop_3_curve_high": {
+        "name": "Krog 3: krivulja pri +15 °C"
+      },
+      "loop_4_curve_low": {
+        "name": "Krog 4: krivulja pri -15 °C"
+      },
+      "loop_4_curve_high": {
+        "name": "Krog 4: krivulja pri +15 °C"
+      },
+      "anti_legionella_temperature": {
+        "name": "Dezinfekcija: temperatura"
+      },
+      "anti_legionella_period": {
+        "name": "Dezinfekcija: perioda"
+      },
+      "anti_legionella_start": {
+        "name": "Dezinfekcija: začetek (min po polnoči)"
+      },
+      "vacation_days": {
+        "name": "Dopust, dni"
+      },
+      "solar_buffer_target": {
+        "name": "Solarni zalogovnik: želena"
+      },
+      "solar_boiler_target": {
+        "name": "Solarni bojler: želena"
+      },
+      "main_pump_power": {
+        "name": "Glavna črpalka: moč"
+      },
+      "loop_1_pump_power": {
+        "name": "Črpalka kroga 1: moč"
+      },
+      "dhw_pump_power": {
+        "name": "Črpalka sanitarne vode: moč"
+      },
+      "circulation_pump_power": {
+        "name": "Cirkulacijska črpalka: moč"
+      }
+    },
+    "button": {
+      "acknowledge_error": {
+        "name": "Potrdi napako"
+      }
+    },
+    "climate": {
+      "dhw": {
+        "name": "Sanitarna voda"
+      },
+      "buffer": {
+        "name": "Zalogovnik"
+      },
+      "loop_1": {
+        "name": "Krog 1"
+      },
+      "loop_2": {
+        "name": "Krog 2"
+      },
+      "loop_3": {
+        "name": "Krog 3"
+      },
+      "loop_4": {
+        "name": "Krog 4"
+      },
+      "pool": {
+        "name": "Bazen"
+      }
+    }
+  }
+}
