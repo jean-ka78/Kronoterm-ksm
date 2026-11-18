@@ -7,7 +7,7 @@ Used with the Home Assistant integration custom_components/kronoterm_ksm
 """
 import esphome.codegen as cg
 from esphome import pins
-from esphome.components import uart
+from esphome.components import socket, uart
 import esphome.config_validation as cv
 from esphome.const import CONF_FLOW_CONTROL_PIN, CONF_ID, CONF_PORT
 
@@ -18,7 +18,30 @@ MULTI_CONF = False
 kt_bridge_ns = cg.esphome_ns.namespace("kt_bridge")
 KTBridge = kt_bridge_ns.class_("KTBridge", cg.Component, uart.UARTDevice)
 
-CONFIG_SCHEMA = (
+def _consume_sockets(config):
+    """Reserve lwIP resources: 1 listening socket (port 502) + 1 client connection.
+
+    ESPHome sizes the lwIP pools from what components declare. Without this the
+    listen() on port 502 can fail on RP2040 because all listening slots are taken
+    by api / ota / web_server. The API changed between ESPHome versions, so try the
+    typed form first (SocketType.TCP_LISTEN / TCP) and fall back to the plain count.
+    """
+    consume = getattr(socket, "consume_sockets", None)
+    if consume is None:
+        return config
+    socket_type = getattr(socket, "SocketType", None)
+    if socket_type is not None and hasattr(socket_type, "TCP_LISTEN") and hasattr(socket_type, "TCP"):
+        try:
+            consume(1, "kt_bridge", socket_type.TCP_LISTEN)(config)
+            consume(1, "kt_bridge_client", socket_type.TCP)(config)
+            return config
+        except TypeError:
+            pass
+    consume(2, "kt_bridge")(config)
+    return config
+
+
+CONFIG_SCHEMA = cv.All(
     cv.Schema(
         {
             cv.GenerateID(): cv.declare_id(KTBridge),
@@ -27,7 +50,8 @@ CONFIG_SCHEMA = (
         }
     )
     .extend(cv.COMPONENT_SCHEMA)
-    .extend(uart.UART_DEVICE_SCHEMA)
+    .extend(uart.UART_DEVICE_SCHEMA),
+    _consume_sockets,
 )
 
 
